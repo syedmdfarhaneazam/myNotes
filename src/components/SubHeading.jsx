@@ -12,15 +12,44 @@ function SubHeading({
   onMoveDown,
 }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const textareaRef = useRef(null);
 
-  // Adjust textarea height dynamically
   useEffect(() => {
     const textarea = textareaRef.current;
-    textarea.style.height = "0px"; // Reset height to 0 to get accurate scrollHeight
+    textarea.style.height = "0px";
     const newHeight = textarea.scrollHeight;
-    textarea.style.height = `${newHeight}px`; // Set height to content height
+    textarea.style.height = `${newHeight}px`;
   }, [value]);
+
+  useEffect(() => {
+    if (!showConfirmDelete) {
+      setIsAnimatingOut(false);
+    }
+  }, [showConfirmDelete]);
+
+  const handleDeleteClick = () => {
+    setShowConfirmDelete(true);
+  };
+
+  const handleConfirmDelete = () => {
+    animateAndClose();
+    setTimeout(() => {
+      onDelete(id);
+    }, 300);
+  };
+
+  const handleCancelDelete = () => {
+    animateAndClose();
+  };
+
+  const animateAndClose = () => {
+    setIsAnimatingOut(true);
+    setTimeout(() => {
+      setShowConfirmDelete(false);
+    }, 300);
+  };
 
   return (
     <div className="subheading-container">
@@ -34,11 +63,14 @@ function SubHeading({
           className="subheading-input"
         />
       </h3>
+
       {comment && <div className="subheading-comment-display">{comment}</div>}
+
       <div>
         <button onClick={() => setShowCommentInput(!showCommentInput)}>
           {showCommentInput ? "✖️" : "💭"}
         </button>
+
         {showCommentInput && (
           <input
             type="text"
@@ -48,10 +80,31 @@ function SubHeading({
             className="subheading-comment-enter"
           />
         )}
-        <button onClick={() => onDelete(id)}>🗑️</button>
+
+        <button onClick={handleDeleteClick}>🗑️</button>
         <button onClick={() => onMoveUp(id)}>⬆️</button>
         <button onClick={() => onMoveDown(id)}>⬇️</button>
       </div>
+
+      {showConfirmDelete && (
+        <div
+          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
+        >
+          <div
+            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
+          >
+            <p>Are you sure you want to delete this subheading?</p>
+            <div className="confirm-delete-buttons">
+              <button onClick={handleConfirmDelete} className="confirm-button">
+                Confirm
+              </button>
+              <button onClick={handleCancelDelete} className="cancel-button">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

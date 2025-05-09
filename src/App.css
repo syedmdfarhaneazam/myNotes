@@ -52,12 +52,12 @@
 
 .notes-container {
   z-index: 200;
-  margin-top: 100px; /* Matches toolbar height */
+  margin-top: 100px;
   width: 100vw;
   padding: 20px;
   box-sizing: border-box;
-  height: calc(100vh - 100px); /* Viewport height minus toolbar */
-  overflow-y: auto; /* Scroll only the notes container */
+  height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 .empty-state {

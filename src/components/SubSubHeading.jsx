@@ -12,35 +12,71 @@ function SubSubHeading({
   onMoveDown,
 }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const textareaRef = useRef(null);
 
-  // Adjust textarea height dynamically
   useEffect(() => {
     const textarea = textareaRef.current;
-    textarea.style.height = "0px"; // Reset height to 0 to get accurate scrollHeight
-    const newHeight = textarea.scrollHeight;
-    textarea.style.height = `${newHeight}px`; // Set height to content height
+    if (textarea) {
+      textarea.style.height = "0px";
+      const newHeight = textarea.scrollHeight;
+      textarea.style.height = `${newHeight}px`;
+    }
   }, [value]);
+
+  useEffect(() => {
+    if (!showConfirmDelete) {
+      setIsAnimatingOut(false);
+    }
+  }, [showConfirmDelete]);
+
+  const handleDeleteClick = () => {
+    setShowConfirmDelete(true);
+  };
+
+  const handleConfirmDelete = () => {
+    animateAndClose();
+    setTimeout(() => {
+      onDelete(id);
+    }, 300);
+  };
+
+  const handleCancelDelete = () => {
+    animateAndClose();
+  };
+
+  const animateAndClose = () => {
+    setIsAnimatingOut(true);
+    setTimeout(() => {
+      setShowConfirmDelete(false);
+    }, 300);
+  };
 
   return (
     <div className="subsubheading-container">
       <h4>
         <textarea
           ref={textareaRef}
-          type="text"
           value={value}
           onChange={(e) => onChange(id, e.target.value)}
           placeholder="Enter sub-subheading"
           className="subsubheading-input"
         />
       </h4>
+
       {comment && (
         <div className="subsubheading-comment-display">{comment}</div>
       )}
+
       <div>
-        <button onClick={() => setShowCommentInput(!showCommentInput)}>
+        <button
+          onClick={() => setShowCommentInput(!showCommentInput)}
+          title={showCommentInput ? "Cancel" : "Add Comment"}
+        >
           {showCommentInput ? "✖️" : "💭"}
         </button>
+
         {showCommentInput && (
           <input
             type="text"
@@ -50,10 +86,39 @@ function SubSubHeading({
             className="subsubheading-comment-enter"
           />
         )}
-        <button onClick={() => onDelete(id)}>🗑️</button>
-        <button onClick={() => onMoveUp(id)}>⬆️</button>
-        <button onClick={() => onMoveDown(id)}>⬇️</button>
+
+        <button onClick={handleDeleteClick} title="Delete">
+          🗑️
+        </button>
+
+        <button onClick={() => onMoveUp(id)} title="Move Up">
+          ⬆️
+        </button>
+
+        <button onClick={() => onMoveDown(id)} title="Move Down">
+          ⬇️
+        </button>
       </div>
+
+      {showConfirmDelete && (
+        <div
+          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
+        >
+          <div
+            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
+          >
+            <p>Are you sure you want to delete this heading?</p>
+            <div className="confirm-delete-buttons">
+              <button onClick={handleConfirmDelete} className="confirm-button">
+                Confirm
+              </button>
+              <button onClick={handleCancelDelete} className="cancel-button">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
