@@ -7,11 +7,11 @@
 }
 
 .fixed-toolbar {
-  margin: 1% 15%;
   position: fixed;
   top: 0;
-  width: 80vw;
-  background-color: rgb(155, 155, 155, 0.1);
+  left: 0;
+  width: 100vw;
+  background-color: rgba(155, 155, 155, 0.1);
   box-shadow: 0 15px 15px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
   z-index: 1000;
@@ -20,6 +20,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .fixed-toolbar h1 {
@@ -50,10 +52,12 @@
 
 .notes-container {
   z-index: 200;
-  margin-top: 100px;
+  margin-top: 100px; /* Matches toolbar height */
   width: 100vw;
   padding: 20px;
   box-sizing: border-box;
+  height: calc(100vh - 100px); /* Viewport height minus toolbar */
+  overflow-y: auto; /* Scroll only the notes container */
 }
 
 .empty-state {

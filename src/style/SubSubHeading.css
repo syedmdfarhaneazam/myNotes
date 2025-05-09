@@ -32,7 +32,7 @@
   font-family: "Caveat", cursive;
   font-weight: 700;
   font-size: 1.8rem;
-  color: #000000;
+  color: #fff;
   width: 70vw;
   padding: 2px 0;
   resize: none;
@@ -43,7 +43,7 @@
 }
 
 .subsubheading-input::placeholder {
-  color: #000000;
+  color: #fff;
 }
 
 .subsubheading-input:hover,

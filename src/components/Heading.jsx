@@ -14,12 +14,11 @@ function Heading({
   const [showCommentInput, setShowCommentInput] = useState(false);
   const textareaRef = useRef(null);
 
-  // Adjust textarea height dynamically
   useEffect(() => {
     const textarea = textareaRef.current;
-    textarea.style.height = "0px"; // Reset height to 0 to get accurate scrollHeight
+    textarea.style.height = "0px";
     const newHeight = textarea.scrollHeight;
-    textarea.style.height = `${newHeight}px`; // Set height to content height
+    textarea.style.height = `${newHeight}px`;
   }, [value]);
 
   return (

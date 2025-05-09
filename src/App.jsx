@@ -34,7 +34,7 @@ function App() {
     const newNote = {
       id: nextId,
       type: type,
-      value: type === "Heading" ? "Your heading text" : "",
+      value: type === "Heading" ? "" : "",
       comment: "",
     };
     const updatedNotes = [...notes, newNote];
@@ -118,74 +118,76 @@ function App() {
       </header>
 
       <div className="notes-container">
-        {notes.length === 0 ? (
-          <div className="empty-state">
-            <p>No notes yet. Start by adding a heading or content above!</p>
-          </div>
-        ) : (
-          notes.map((note) => {
-            switch (note.type) {
-              case "Heading":
-                return (
-                  <Heading
-                    key={note.id}
-                    id={note.id}
-                    value={note.value}
-                    comment={note.comment}
-                    onChange={updateNote}
-                    onCommentChange={updateComment}
-                    onDelete={deleteNote}
-                    onMoveUp={moveNoteUp}
-                    onMoveDown={moveNoteDown}
-                  />
-                );
-              case "SubHeading":
-                return (
-                  <SubHeading
-                    key={note.id}
-                    id={note.id}
-                    value={note.value}
-                    comment={note.comment}
-                    onChange={updateNote}
-                    onCommentChange={updateComment}
-                    onDelete={deleteNote}
-                    onMoveUp={moveNoteUp}
-                    onMoveDown={moveNoteDown}
-                  />
-                );
-              case "SubSubHeading":
-                return (
-                  <SubSubHeading
-                    key={note.id}
-                    id={note.id}
-                    value={note.value}
-                    comment={note.comment}
-                    onChange={updateNote}
-                    onCommentChange={updateComment}
-                    onDelete={deleteNote}
-                    onMoveUp={moveNoteUp}
-                    onMoveDown={moveNoteDown}
-                  />
-                );
-              case "Content":
-                return (
-                  <Content
-                    key={note.id}
-                    id={note.id}
-                    value={note.value}
-                    comment={note.comment}
-                    onChange={updateNote}
-                    onCommentChange={updateComment}
-                    onDelete={deleteNote}
-                    onMoveUp={moveNoteUp}
-                    onMoveDown={moveNoteDown}
-                  />
-                );
-              default:
-                return null;
-            }
-          })
-        )}
+        <div className="notes-inner">
+          {notes.length === 0 ? (
+            <div className="empty-state">
+              <p>No notes yet. Start by adding a heading or content above!</p>
+            </div>
+          ) : (
+            notes.map((note) => {
+              switch (note.type) {
+                case "Heading":
+                  return (
+                    <Heading
+                      key={note.id}
+                      id={note.id}
+                      value={note.value}
+                      comment={note.comment}
+                      onChange={updateNote}
+                      onCommentChange={updateComment}
+                      onDelete={deleteNote}
+                      onMoveUp={moveNoteUp}
+                      onMoveDown={moveNoteDown}
+                    />
+                  );
+                case "SubHeading":
+                  return (
+                    <SubHeading
+                      key={note.id}
+                      id={note.id}
+                      value={note.value}
+                      comment={note.comment}
+                      onChange={updateNote}
+                      onCommentChange={updateComment}
+                      onDelete={deleteNote}
+                      onMoveUp={moveNoteUp}
+                      onMoveDown={moveNoteDown}
+                    />
+                  );
+                case "SubSubHeading":
+                  return (
+                    <SubSubHeading
+                      key={note.id}
+                      id={note.id}
+                      value={note.value}
+                      comment={note.comment}
+                      onChange={updateNote}
+                      onCommentChange={updateComment}
+                      onDelete={deleteNote}
+                      onMoveUp={moveNoteUp}
+                      onMoveDown={moveNoteDown}
+                    />
+                  );
+                case "Content":
+                  return (
+                    <Content
+                      key={note.id}
+                      id={note.id}
+                      value={note.value}
+                      comment={note.comment}
+                      onChange={updateNote}
+                      onCommentChange={updateComment}
+                      onDelete={deleteNote}
+                      onMoveUp={moveNoteUp}
+                      onMoveDown={moveNoteDown}
+                    />
+                  );
+                default:
+                  return null;
+              }
+            })
+          )}
+        </div>
       </div>
     </div>
   );
