@@ -1,37 +1,39 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Heading from "./components/Heading";
+import AddImage from "./components/AddImage";
 import SubHeading from "./components/SubHeading";
 import SubSubHeading from "./components/SubSubHeading";
 import Content from "./components/Content";
 import Code from "./components/Code";
 import Subject from "./components/Subject";
+import { getSubjects, saveSubjects } from "./indexedDb.js";
 
 function App() {
-  const [subjects, setSubjects] = useState(() => {
-    const saved = localStorage.getItem("mySubjects");
-    return saved
-      ? JSON.parse(saved)
-      : [{ id: 1, name: "Default Subject", notes: [] }];
-  });
-
-  const [currentSubjectId, setCurrentSubjectId] = useState(() => {
-    const saved = localStorage.getItem("mySubjects");
-    return saved ? JSON.parse(saved)[0].id : 1;
-  });
-
-  const [nextSubjectId, setNextSubjectId] = useState(() => {
-    const saved = localStorage.getItem("mySubjects");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      const maxId = Math.max(...parsed.map((s) => s.id), 0);
-      return maxId + 1;
-    }
-    return 2;
-  });
-
+  const [subjects, setSubjects] = useState([]);
+  const [currentSubjectId, setCurrentSubjectId] = useState(null);
+  const [nextSubjectId, setNextSubjectId] = useState(2);
   useEffect(() => {
-    localStorage.setItem("mySubjects", JSON.stringify(subjects));
+    const loadSubjects = async () => {
+      const storedSubjects = await getSubjects();
+      if (storedSubjects && storedSubjects.length > 0) {
+        setSubjects(storedSubjects);
+        setCurrentSubjectId(storedSubjects[0].id);
+        const maxId = Math.max(...storedSubjects.map((s) => s.id));
+        setNextSubjectId(maxId + 1);
+      } else {
+        const defaultSubject = [{ id: 1, name: "Default Subject", notes: [] }];
+        setSubjects(defaultSubject);
+        setCurrentSubjectId(1);
+        setNextSubjectId(2);
+      }
+    };
+    loadSubjects();
+  }, []);
+  useEffect(() => {
+    if (subjects.length > 0) {
+      saveSubjects(subjects);
+    }
   }, [subjects]);
 
   const addSubject = (name) => {
@@ -167,6 +169,7 @@ function App() {
           </button>
           <button onClick={() => addNote("Content")}>+ Content</button>
           <button onClick={() => addNote("Code")}>+ Code</button>
+          <button onClick={() => addNote("Image")}>+ Image</button>
         </div>
       </header>
 
@@ -203,6 +206,8 @@ function App() {
                   return <Content {...props} />;
                 case "Code":
                   return <Code {...props} language={note.language} />;
+                case "Image":
+                  return <AddImage {...props} />;
                 default:
                   return null;
               }
