@@ -9,47 +9,37 @@ import Subject from "./components/Subject";
 
 function App() {
   const [subjects, setSubjects] = useState(() => {
-    const savedSubjects = localStorage.getItem("mySubjects");
-    return savedSubjects
-      ? JSON.parse(savedSubjects)
+    const saved = localStorage.getItem("mySubjects");
+    return saved
+      ? JSON.parse(saved)
       : [{ id: 1, name: "Default Subject", notes: [] }];
   });
 
   const [currentSubjectId, setCurrentSubjectId] = useState(() => {
-    const savedSubjects = localStorage.getItem("mySubjects");
-    return savedSubjects ? JSON.parse(savedSubjects)[0].id : 1;
+    const saved = localStorage.getItem("mySubjects");
+    return saved ? JSON.parse(saved)[0].id : 1;
   });
 
   const [nextSubjectId, setNextSubjectId] = useState(() => {
-    const savedSubjects = localStorage.getItem("mySubjects");
-    if (savedSubjects) {
-      const parsedSubjects = JSON.parse(savedSubjects);
-      const maxId = parsedSubjects.reduce(
-        (max, subject) => (subject.id > max ? subject.id : max),
-        0,
-      );
+    const saved = localStorage.getItem("mySubjects");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      const maxId = Math.max(...parsed.map((s) => s.id), 0);
       return maxId + 1;
     }
     return 2;
   });
 
   useEffect(() => {
-    if (subjects.length > 0 || localStorage.getItem("mySubjects")) {
-      localStorage.setItem("mySubjects", JSON.stringify(subjects));
-    }
+    localStorage.setItem("mySubjects", JSON.stringify(subjects));
   }, [subjects]);
 
   const addSubject = (name) => {
-    const newSubject = {
-      id: nextSubjectId,
-      name,
-      notes: [],
-    };
-    const updatedSubjects = [...subjects, newSubject];
-    setSubjects(updatedSubjects);
+    const newSubject = { id: nextSubjectId, name, notes: [] };
+    const updated = [...subjects, newSubject];
+    setSubjects(updated);
     setNextSubjectId(nextSubjectId + 1);
     setCurrentSubjectId(newSubject.id);
-    localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
   };
 
   const deleteSubject = (id) => {
@@ -57,16 +47,19 @@ function App() {
       alert("Cannot delete the last subject.");
       return;
     }
-    const updatedSubjects = subjects.filter((subject) => subject.id !== id);
-    setSubjects(updatedSubjects);
-    localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
+    const updated = subjects.filter((s) => s.id !== id);
+    setSubjects(updated);
     if (currentSubjectId === id) {
-      setCurrentSubjectId(updatedSubjects[0].id);
+      setCurrentSubjectId(updated[0].id);
     }
   };
 
+  const getNextNoteId = (notes) => {
+    return notes.length === 0 ? 1 : Math.max(...notes.map((n) => n.id)) + 1;
+  };
+
   const addNote = (type) => {
-    const updatedSubjects = subjects.map((subject) =>
+    const updated = subjects.map((subject) =>
       subject.id === currentSubjectId
         ? {
             ...subject,
@@ -75,7 +68,7 @@ function App() {
               {
                 id: getNextNoteId(subject.notes),
                 type,
-                value: type === "Code" ? "" : "",
+                value: "",
                 language: type === "Code" ? "javascript" : undefined,
                 comment: "",
               },
@@ -83,20 +76,11 @@ function App() {
           }
         : subject,
     );
-    setSubjects(updatedSubjects);
-    localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
-  };
-
-  const getNextNoteId = (notes) => {
-    const maxId = notes.reduce(
-      (max, note) => (note.id > max ? note.id : max),
-      0,
-    );
-    return maxId + 1;
+    setSubjects(updated);
   };
 
   const updateNote = (id, newValue, newLanguage) => {
-    const updatedSubjects = subjects.map((subject) =>
+    const updated = subjects.map((subject) =>
       subject.id === currentSubjectId
         ? {
             ...subject,
@@ -112,12 +96,11 @@ function App() {
           }
         : subject,
     );
-    setSubjects(updatedSubjects);
-    localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
+    setSubjects(updated);
   };
 
   const updateComment = (id, newComment) => {
-    const updatedSubjects = subjects.map((subject) =>
+    const updated = subjects.map((subject) =>
       subject.id === currentSubjectId
         ? {
             ...subject,
@@ -127,63 +110,37 @@ function App() {
           }
         : subject,
     );
-    setSubjects(updatedSubjects);
-    localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
+    setSubjects(updated);
   };
 
   const deleteNote = (id) => {
-    const updatedSubjects = subjects.map((subject) =>
+    const updated = subjects.map((subject) =>
       subject.id === currentSubjectId
-        ? {
-            ...subject,
-            notes: subject.notes.filter((note) => note.id !== id),
-          }
+        ? { ...subject, notes: subject.notes.filter((note) => note.id !== id) }
         : subject,
     );
-    setSubjects(updatedSubjects);
-    localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
+    setSubjects(updated);
   };
 
-  const moveNoteUp = (id) => {
-    const currentSubject = subjects.find(
-      (subject) => subject.id === currentSubjectId,
-    );
-    const index = currentSubject.notes.findIndex((note) => note.id === id);
-    if (index > 0) {
-      const updatedNotes = [...currentSubject.notes];
-      [updatedNotes[index - 1], updatedNotes[index]] = [
-        updatedNotes[index],
-        updatedNotes[index - 1],
-      ];
-      const updatedSubjects = subjects.map((subject) =>
-        subject.id === currentSubjectId
-          ? { ...subject, notes: updatedNotes }
-          : subject,
-      );
-      setSubjects(updatedSubjects);
-      localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
-    }
-  };
+  const moveNote = (id, direction) => {
+    const current = subjects.find((subject) => subject.id === currentSubjectId);
+    const index = current.notes.findIndex((note) => note.id === id);
+    const newIndex = index + direction;
 
-  const moveNoteDown = (id) => {
-    const currentSubject = subjects.find(
-      (subject) => subject.id === currentSubjectId,
+    if (newIndex < 0 || newIndex >= current.notes.length) return;
+
+    const updatedNotes = [...current.notes];
+    [updatedNotes[index], updatedNotes[newIndex]] = [
+      updatedNotes[newIndex],
+      updatedNotes[index],
+    ];
+
+    const updated = subjects.map((subject) =>
+      subject.id === currentSubjectId
+        ? { ...subject, notes: updatedNotes }
+        : subject,
     );
-    const index = currentSubject.notes.findIndex((note) => note.id === id);
-    if (index < currentSubject.notes.length - 1) {
-      const updatedNotes = [...currentSubject.notes];
-      [updatedNotes[index], updatedNotes[index + 1]] = [
-        updatedNotes[index + 1],
-        updatedNotes[index],
-      ];
-      const updatedSubjects = subjects.map((subject) =>
-        subject.id === currentSubjectId
-          ? { ...subject, notes: updatedNotes }
-          : subject,
-      );
-      setSubjects(updatedSubjects);
-      localStorage.setItem("mySubjects", JSON.stringify(updatedSubjects));
-    }
+    setSubjects(updated);
   };
 
   const currentSubject = subjects.find(
@@ -203,27 +160,13 @@ function App() {
             addSubject={addSubject}
             deleteSubject={deleteSubject}
           />
-          <button className="add-heading" onClick={() => addNote("Heading")}>
-            + Heading
-          </button>
-          <button
-            className="add-subheading"
-            onClick={() => addNote("SubHeading")}
-          >
-            + SubHeading
-          </button>
-          <button
-            className="add-subsubheading"
-            onClick={() => addNote("SubSubHeading")}
-          >
+          <button onClick={() => addNote("Heading")}>+ Heading</button>
+          <button onClick={() => addNote("SubHeading")}>+ SubHeading</button>
+          <button onClick={() => addNote("SubSubHeading")}>
             + SubSubHeading
           </button>
-          <button className="add-content" onClick={() => addNote("Content")}>
-            + Content
-          </button>
-          <button className="add-code" onClick={() => addNote("Code")}>
-            + Code
-          </button>
+          <button onClick={() => addNote("Content")}>+ Content</button>
+          <button onClick={() => addNote("Code")}>+ Code</button>
         </div>
       </header>
 
@@ -237,78 +180,29 @@ function App() {
             </div>
           ) : (
             notes.map((note) => {
+              const props = {
+                key: note.id,
+                id: note.id,
+                value: note.value,
+                comment: note.comment,
+                onChange: updateNote,
+                onCommentChange: updateComment,
+                onDelete: deleteNote,
+                onMoveUp: () => moveNote(note.id, -1),
+                onMoveDown: () => moveNote(note.id, 1),
+              };
+
               switch (note.type) {
                 case "Heading":
-                  return (
-                    <Heading
-                      key={note.id}
-                      id={note.id}
-                      value={note.value}
-                      comment={note.comment}
-                      onChange={updateNote}
-                      onCommentChange={updateComment}
-                      onDelete={deleteNote}
-                      onMoveUp={moveNoteUp}
-                      onMoveDown={moveNoteDown}
-                    />
-                  );
+                  return <Heading {...props} />;
                 case "SubHeading":
-                  return (
-                    <SubHeading
-                      key={note.id}
-                      id={note.id}
-                      value={note.value}
-                      comment={note.comment}
-                      onChange={updateNote}
-                      onCommentChange={updateComment}
-                      onDelete={deleteNote}
-                      onMoveUp={moveNoteUp}
-                      onMoveDown={moveNoteDown}
-                    />
-                  );
+                  return <SubHeading {...props} />;
                 case "SubSubHeading":
-                  return (
-                    <SubSubHeading
-                      key={note.id}
-                      id={note.id}
-                      value={note.value}
-                      comment={note.comment}
-                      onChange={updateNote}
-                      onCommentChange={updateComment}
-                      onDelete={deleteNote}
-                      onMoveUp={moveNoteUp}
-                      onMoveDown={moveNoteDown}
-                    />
-                  );
+                  return <SubSubHeading {...props} />;
                 case "Content":
-                  return (
-                    <Content
-                      key={note.id}
-                      id={note.id}
-                      value={note.value}
-                      comment={note.comment}
-                      onChange={updateNote}
-                      onCommentChange={updateComment}
-                      onDelete={deleteNote}
-                      onMoveUp={moveNoteUp}
-                      onMoveDown={moveNoteDown}
-                    />
-                  );
+                  return <Content {...props} />;
                 case "Code":
-                  return (
-                    <Code
-                      key={note.id}
-                      id={note.id}
-                      value={note.value}
-                      language={note.language}
-                      comment={note.comment}
-                      onChange={updateNote}
-                      onCommentChange={updateComment}
-                      onDelete={deleteNote}
-                      onMoveUp={moveNoteUp}
-                      onMoveDown={moveNoteDown}
-                    />
-                  );
+                  return <Code {...props} language={note.language} />;
                 default:
                   return null;
               }
