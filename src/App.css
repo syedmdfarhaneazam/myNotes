@@ -1,0 +1,68 @@
+.app-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fixed-toolbar {
+  margin: 1% 15%;
+  position: fixed;
+  top: 0;
+  width: 80vw;
+  background-color: rgb(155, 155, 155, 0.1);
+  box-shadow: 0 15px 15px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  border-radius: 15px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fixed-toolbar h1 {
+  margin: 0;
+  padding: 8px 8px;
+  font-size: 50px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 20px;
+}
+
+.toolbar button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.5);
+  color: white;
+  transition: background-color 0.5s;
+}
+
+.toolbar button:hover {
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+.notes-container {
+  z-index: 200;
+  margin-top: 100px;
+  width: 100vw;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+}
+
+.notes-container > * {
+  width: 100%;
+  box-sizing: border-box;
+}
