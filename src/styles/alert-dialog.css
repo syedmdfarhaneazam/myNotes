@@ -1,0 +1,43 @@
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.alert-dialog {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  max-width: 32rem;
+  width: 100%;
+}
+
+.alert-header {
+  padding: 1.5rem 1.5rem 1rem;
+}
+
+.alert-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.alert-header p {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.alert-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem 1.5rem;
+}

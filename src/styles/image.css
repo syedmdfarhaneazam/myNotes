@@ -1,0 +1,82 @@
+.image-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem 0;
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: slideInFromTop 0.5s forwards;
+  width: 100%;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--border-radius);
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: calc(var(--border-radius) - 2px);
+  margin-bottom: 1rem;
+  object-fit: contain;
+  border: 1px solid hsl(var(--border));
+}
+
+.image-placeholder {
+  border: 2px dashed hsl(var(--border));
+  border-radius: calc(var(--border-radius) - 2px);
+  padding: 3rem 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.image-upload {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.image-upload input[type="file"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--border-radius) - 2px);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+}
+
+.image-controls {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.image-container:hover .image-controls {
+  opacity: 1;
+}
+
+.image-comment-display {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--border-radius) - 2px);
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+@media (max-width: 768px) {
+  .image-controls {
+    opacity: 1;
+  }
+
+  .image-upload {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

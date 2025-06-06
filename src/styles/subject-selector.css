@@ -1,0 +1,62 @@
+.subject-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subject-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.subject-dropdown {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--border-radius);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.subject-dropdown:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+.add-subject-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.add-subject-form .input {
+  flex: 1;
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .subject-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subject-dropdown {
+    min-width: auto;
+  }
+
+  .add-subject-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-subject-form .input {
+    min-width: auto;
+  }
+}

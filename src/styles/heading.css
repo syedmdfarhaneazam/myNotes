@@ -1,0 +1,90 @@
+.heading-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  opacity: 0;
+  transform: translateY(-40px);
+  animation: slideInFromTop 0.5s forwards;
+  width: 100%;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--border-radius);
+}
+
+@keyframes slideInFromTop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heading-container h1 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.heading-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: inherit;
+  width: 100%;
+  padding: 0.25rem 0;
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.2;
+}
+
+.heading-input::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.7;
+}
+
+.heading-controls {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.heading-container:hover .heading-controls {
+  opacity: 1;
+}
+
+.heading-comment-display {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-style: italic;
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--border-radius) - 2px);
+  background-color: hsl(var(--muted) / 0.8);
+}
+
+.heading-container:hover .heading-comment-display {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .heading-input {
+    font-size: 2rem;
+  }
+
+  .heading-controls {
+    opacity: 1;
+  }
+}
