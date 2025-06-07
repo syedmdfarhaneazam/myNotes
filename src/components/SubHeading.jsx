@@ -1,19 +1,24 @@
 import { useState, useRef, useEffect } from "react";
+import ColorPicker from "./ColorPicker";
+import ConfirmationModal from "./ConfirmationModal";
+import { useTheme } from "../context/ThemeContext";
 import "../style/SubHeading.css";
 
 function SubHeading({
   id,
   value,
   comment,
+  color,
   onChange,
   onCommentChange,
+  onColorChange,
   onDelete,
   onMoveUp,
   onMoveDown,
 }) {
+  const { theme } = useTheme();
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -23,36 +28,24 @@ function SubHeading({
     textarea.style.height = `${newHeight}px`;
   }, [value]);
 
-  useEffect(() => {
-    if (!showConfirmDelete) {
-      setIsAnimatingOut(false);
-    }
-  }, [showConfirmDelete]);
-
   const handleDeleteClick = () => {
     setShowConfirmDelete(true);
   };
 
   const handleConfirmDelete = () => {
-    animateAndClose();
-    setTimeout(() => {
-      onDelete(id);
-    }, 300);
+    onDelete(id);
+    setShowConfirmDelete(false);
   };
 
   const handleCancelDelete = () => {
-    animateAndClose();
-  };
-
-  const animateAndClose = () => {
-    setIsAnimatingOut(true);
-    setTimeout(() => {
-      setShowConfirmDelete(false);
-    }, 300);
+    setShowConfirmDelete(false);
   };
 
   return (
-    <div className="subheading-container">
+    <div
+      className="subheading-container"
+      style={{ borderColor: theme.colors.primary }}
+    >
       <h3>
         <textarea
           ref={textareaRef}
@@ -61,13 +54,22 @@ function SubHeading({
           onChange={(e) => onChange(id, e.target.value)}
           placeholder="Enter subheading"
           className="subheading-input"
+          style={{ color: color || "#000000" }}
         />
       </h3>
 
       {comment && <div className="subheading-comment-display">{comment}</div>}
 
-      <div>
-        <button onClick={() => setShowCommentInput(!showCommentInput)}>
+      <div className="subheading-controls">
+        <ColorPicker
+          currentColor={color}
+          onColorChange={(newColor) => onColorChange(id, newColor)}
+        />
+
+        <button
+          onClick={() => setShowCommentInput(!showCommentInput)}
+          title={showCommentInput ? "Hide comment" : "Add comment"}
+        >
           {showCommentInput ? "✖️" : "💭"}
         </button>
 
@@ -81,30 +83,26 @@ function SubHeading({
           />
         )}
 
-        <button onClick={handleDeleteClick}>🗑️</button>
-        <button onClick={() => onMoveUp(id)}>⬆️</button>
-        <button onClick={() => onMoveDown(id)}>⬇️</button>
+        <button onClick={handleDeleteClick} title="Delete">
+          🗑️
+        </button>
+        <button onClick={() => onMoveUp(id)} title="Move up">
+          ⬆️
+        </button>
+        <button onClick={() => onMoveDown(id)} title="Move down">
+          ⬇️
+        </button>
       </div>
 
-      {showConfirmDelete && (
-        <div
-          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
-        >
-          <div
-            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
-          >
-            <p>Are you sure you want to delete this subheading?</p>
-            <div className="confirm-delete-buttons">
-              <button onClick={handleConfirmDelete} className="confirm-button">
-                Confirm
-              </button>
-              <button onClick={handleCancelDelete} className="cancel-button">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmationModal
+        isOpen={showConfirmDelete}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        title="Delete Subheading"
+        message="Are you sure you want to delete this subheading?"
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 }

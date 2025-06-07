@@ -1,26 +1,26 @@
-// src/components/AddImage.jsx
 import { useState, useRef, useEffect } from "react";
+import ColorPicker from "./ColorPicker";
+import ConfirmationModal from "./ConfirmationModal";
+import { useTheme } from "../context/ThemeContext";
 import "../style/AddImage.css";
 
 function AddImage({
   id,
   value,
   comment,
+  color,
   onChange,
   onCommentChange,
+  onColorChange,
   onDelete,
   onMoveUp,
   onMoveDown,
 }) {
+  const { theme } = useTheme();
   const [imagePreview, setImagePreview] = useState(value || "");
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const fileInputRef = useRef();
-
-  useEffect(() => {
-    if (!showConfirmDelete) setIsAnimatingOut(false);
-  }, [showConfirmDelete]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -40,27 +40,28 @@ function AddImage({
 
   const handleConfirmDelete = () => {
     onDelete(id);
-    animateAndClose();
+    setShowConfirmDelete(false);
   };
 
   const handleCancelDelete = () => {
-    animateAndClose();
-  };
-
-  const animateAndClose = () => {
-    setIsAnimatingOut(true);
-    setTimeout(() => {
-      setShowConfirmDelete(false);
-    }, 300);
+    setShowConfirmDelete(false);
   };
 
   return (
-    <div className="image-container">
+    <div
+      className="image-container"
+      style={{ borderColor: theme.colors.primary }}
+    >
       {imagePreview ? (
-        <img src={imagePreview} alt="Uploaded" className="preview-img" />
+        <img
+          src={imagePreview || "/placeholder.svg"}
+          alt="Uploaded"
+          className="preview-img"
+        />
       ) : (
-        <p>No image uploaded.</p>
+        <p style={{ color: theme.colors.text }}>No image uploaded.</p>
       )}
+
       <input
         type="file"
         accept="image/*"
@@ -68,18 +69,39 @@ function AddImage({
         onChange={handleImageChange}
         style={{ display: "none" }}
       />
-      <button
-        className="upload-button"
-        onClick={() => fileInputRef.current.click()}
-      >
-        📷
-      </button>
-      <button onClick={handleDeleteClick}>🗑️</button>
-      <button onClick={() => onMoveUp(id)}>⬆️</button>
-      <button onClick={() => onMoveDown(id)}>⬇️</button>
-      <button onClick={() => setShowCommentInput(!showCommentInput)}>
-        {showCommentInput ? "✖️" : "💭"}
-      </button>
+
+      <div className="image-controls">
+        <ColorPicker
+          currentColor={color}
+          onColorChange={(newColor) => onColorChange(id, newColor)}
+        />
+
+        <button
+          className="upload-button"
+          onClick={() => fileInputRef.current.click()}
+          title="Upload image"
+        >
+          📷
+        </button>
+
+        <button onClick={handleDeleteClick} title="Delete">
+          🗑️
+        </button>
+        <button onClick={() => onMoveUp(id)} title="Move up">
+          ⬆️
+        </button>
+        <button onClick={() => onMoveDown(id)} title="Move down">
+          ⬇️
+        </button>
+
+        <button
+          onClick={() => setShowCommentInput(!showCommentInput)}
+          title={showCommentInput ? "Hide comment" : "Add comment"}
+        >
+          {showCommentInput ? "✖️" : "💭"}
+        </button>
+      </div>
+
       {showCommentInput && (
         <input
           type="text"
@@ -87,28 +109,23 @@ function AddImage({
           onChange={(e) => onCommentChange(id, e.target.value)}
           placeholder="Enter comment"
           className="image-comment"
+          style={{
+            backgroundColor: theme.colors.background,
+            color: theme.colors.text,
+            borderColor: theme.colors.primary,
+          }}
         />
       )}
 
-      {showConfirmDelete && (
-        <div
-          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
-        >
-          <div
-            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
-          >
-            <p>Delete this image?</p>
-            <div className="confirm-delete-buttons">
-              <button onClick={handleConfirmDelete} className="confirm-button">
-                Delete
-              </button>
-              <button onClick={handleCancelDelete} className="cancel-button">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmationModal
+        isOpen={showConfirmDelete}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        title="Delete Image"
+        message="Are you sure you want to delete this image?"
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 }

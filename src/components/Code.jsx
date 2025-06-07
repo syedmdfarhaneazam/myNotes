@@ -1,34 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AceEditor from "react-ace";
+import ColorPicker from "./ColorPicker";
+import ConfirmationModal from "./ConfirmationModal";
+import { useTheme } from "../context/ThemeContext";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-sh";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
-import "./../style/Code.css";
+import "../style/Code.css";
 
 const Code = ({
   id,
   value,
   language,
   comment,
+  color,
   onChange,
   onCommentChange,
+  onColorChange,
   onDelete,
   onMoveUp,
   onMoveDown,
 }) => {
+  const { theme } = useTheme();
   const [selectedLanguage, setSelectedLanguage] = useState(
     language || "javascript",
   );
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
-
-  useEffect(() => {
-    if (!showConfirmDelete) {
-      setIsAnimatingOut(false);
-    }
-  }, [showConfirmDelete]);
 
   const handleLanguageChange = (e) => {
     const newLanguage = e.target.value;
@@ -46,41 +45,59 @@ const Code = ({
 
   const handleConfirmDelete = () => {
     onDelete(id);
-    animateAndClose();
+    setShowConfirmDelete(false);
   };
 
   const handleCancelDelete = () => {
-    animateAndClose();
-  };
-
-  const animateAndClose = () => {
-    setIsAnimatingOut(true);
-    setTimeout(() => {
-      setShowConfirmDelete(false);
-    }, 300);
+    setShowConfirmDelete(false);
   };
 
   return (
-    <div className="code-container">
-      <div className="code-header">
+    <div
+      className="code-container"
+      style={{ borderColor: theme.colors.primary }}
+    >
+      <div
+        className="code-header"
+        style={{ backgroundColor: theme.colors.secondary }}
+      >
         <select
           value={selectedLanguage}
           onChange={handleLanguageChange}
           className="language-dropdown"
+          style={{
+            backgroundColor: theme.colors.background,
+            color: theme.colors.text,
+            borderColor: theme.colors.primary,
+          }}
         >
           <option value="javascript">JavaScript</option>
           <option value="java">Java</option>
           <option value="python">Python</option>
           <option value="sh">Bash</option>
         </select>
+
         <div className="code-actions">
-          <button onClick={() => onMoveUp(id)} disabled={id === 0}>
+          <ColorPicker
+            currentColor={color}
+            onColorChange={(newColor) => onColorChange(id, newColor)}
+          />
+          <button
+            onClick={() => onMoveUp(id)}
+            disabled={id === 0}
+            title="Move up"
+          >
             ↑
           </button>
-          <button onClick={() => onMoveDown(id)}>↓</button>
-          <button onClick={handleDeleteClick}>🗑️</button>
+          <button onClick={() => onMoveDown(id)} title="Move down">
+            ↓
+          </button>
+          <button onClick={handleDeleteClick} title="Delete">
+            🗑️
+          </button>
         </div>
       </div>
+
       <AceEditor
         mode={selectedLanguage}
         theme="monokai"
@@ -97,32 +114,28 @@ const Code = ({
         }}
         style={{ width: "100%", minHeight: "200px" }}
       />
+
       <textarea
         className="code-comment"
         placeholder="Add a comment..."
         value={comment}
         onChange={(e) => onCommentChange(id, e.target.value)}
+        style={{
+          backgroundColor: theme.colors.background,
+          color: theme.colors.text,
+          borderColor: theme.colors.primary,
+        }}
       />
 
-      {showConfirmDelete && (
-        <div
-          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
-        >
-          <div
-            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
-          >
-            <p>Are you sure you want to delete this code snippet?</p>
-            <div className="confirm-delete-buttons">
-              <button onClick={handleConfirmDelete} className="confirm-button">
-                Confirm
-              </button>
-              <button onClick={handleCancelDelete} className="cancel-button">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmationModal
+        isOpen={showConfirmDelete}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        title="Delete Code"
+        message="Are you sure you want to delete this code snippet?"
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 };

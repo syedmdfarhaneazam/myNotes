@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import "./../style/Subject.css";
+import { useState } from "react";
+import ConfirmationModal from "./ConfirmationModal";
+import { useTheme } from "../context/ThemeContext";
+import "../style/Subject.css";
 
 function Subject({
   subjects,
@@ -8,16 +10,10 @@ function Subject({
   addSubject,
   deleteSubject,
 }) {
+  const { theme } = useTheme();
   const [newSubjectName, setNewSubjectName] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
-
-  useEffect(() => {
-    if (!showConfirmDelete) {
-      setIsAnimatingOut(false);
-    }
-  }, [showConfirmDelete]);
 
   const handleSelectChange = (e) => {
     const value = e.target.value;
@@ -44,18 +40,11 @@ function Subject({
 
   const handleConfirmDelete = () => {
     deleteSubject(currentSubjectId);
-    animateAndClose();
+    setShowConfirmDelete(false);
   };
 
   const handleCancelDelete = () => {
-    animateAndClose();
-  };
-
-  const animateAndClose = () => {
-    setIsAnimatingOut(true);
-    setTimeout(() => {
-      setShowConfirmDelete(false);
-    }, 300);
+    setShowConfirmDelete(false);
   };
 
   const currentSubject = subjects.find(
@@ -69,6 +58,11 @@ function Subject({
           value={currentSubjectId}
           onChange={handleSelectChange}
           className="subject-dropdown"
+          style={{
+            backgroundColor: theme.colors.background,
+            color: theme.colors.text,
+            borderColor: theme.colors.primary,
+          }}
         >
           {subjects.map((subject) => (
             <option key={subject.id} value={subject.id}>
@@ -77,10 +71,15 @@ function Subject({
           ))}
           <option value="add-subject">+ Add a Subject</option>
         </select>
-        <button onClick={handleDeleteClick} className="delete-subject">
+        <button
+          onClick={handleDeleteClick}
+          className="delete-subject"
+          title="Delete subject"
+        >
           🗑️
         </button>
       </div>
+
       {showInput && (
         <form onSubmit={handleAddSubject} className="add-subject-form">
           <input
@@ -89,31 +88,34 @@ function Subject({
             onChange={(e) => setNewSubjectName(e.target.value)}
             placeholder="Enter subject name"
             className="subject-input"
+            style={{
+              backgroundColor: theme.colors.background,
+              color: theme.colors.text,
+              borderColor: theme.colors.primary,
+            }}
           />
-          <button type="submit" className="submit-subject">
+          <button
+            type="submit"
+            className="submit-subject"
+            style={{
+              backgroundColor: theme.colors.primary,
+              color: theme.colors.text,
+            }}
+          >
             Add
           </button>
         </form>
       )}
-      {showConfirmDelete && (
-        <div
-          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
-        >
-          <div
-            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
-          >
-            <p>Are you sure you want to delete "{currentSubject.name}"?</p>
-            <div className="confirm-delete-buttons">
-              <button onClick={handleConfirmDelete} className="confirm-button">
-                Confirm
-              </button>
-              <button onClick={handleCancelDelete} className="cancel-button">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
+      <ConfirmationModal
+        isOpen={showConfirmDelete}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        title="Delete Subject"
+        message={`Are you sure you want to delete "${currentSubject?.name}"?`}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 }

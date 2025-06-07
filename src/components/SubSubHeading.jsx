@@ -1,19 +1,24 @@
 import { useState, useRef, useEffect } from "react";
+import ColorPicker from "./ColorPicker";
+import ConfirmationModal from "./ConfirmationModal";
+import { useTheme } from "../context/ThemeContext";
 import "../style/SubSubHeading.css";
 
 function SubSubHeading({
   id,
   value,
   comment,
+  color,
   onChange,
   onCommentChange,
+  onColorChange,
   onDelete,
   onMoveUp,
   onMoveDown,
 }) {
+  const { theme } = useTheme();
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -25,36 +30,24 @@ function SubSubHeading({
     }
   }, [value]);
 
-  useEffect(() => {
-    if (!showConfirmDelete) {
-      setIsAnimatingOut(false);
-    }
-  }, [showConfirmDelete]);
-
   const handleDeleteClick = () => {
     setShowConfirmDelete(true);
   };
 
   const handleConfirmDelete = () => {
-    animateAndClose();
-    setTimeout(() => {
-      onDelete(id);
-    }, 300);
+    onDelete(id);
+    setShowConfirmDelete(false);
   };
 
   const handleCancelDelete = () => {
-    animateAndClose();
-  };
-
-  const animateAndClose = () => {
-    setIsAnimatingOut(true);
-    setTimeout(() => {
-      setShowConfirmDelete(false);
-    }, 300);
+    setShowConfirmDelete(false);
   };
 
   return (
-    <div className="subsubheading-container">
+    <div
+      className="subsubheading-container"
+      style={{ borderColor: theme.colors.primary }}
+    >
       <h4>
         <textarea
           ref={textareaRef}
@@ -62,6 +55,7 @@ function SubSubHeading({
           onChange={(e) => onChange(id, e.target.value)}
           placeholder="Enter sub-subheading"
           className="subsubheading-input"
+          style={{ color: color || "#000000" }}
         />
       </h4>
 
@@ -69,7 +63,12 @@ function SubSubHeading({
         <div className="subsubheading-comment-display">{comment}</div>
       )}
 
-      <div>
+      <div className="subsubheading-controls">
+        <ColorPicker
+          currentColor={color}
+          onColorChange={(newColor) => onColorChange(id, newColor)}
+        />
+
         <button
           onClick={() => setShowCommentInput(!showCommentInput)}
           title={showCommentInput ? "Cancel" : "Add Comment"}
@@ -100,25 +99,15 @@ function SubSubHeading({
         </button>
       </div>
 
-      {showConfirmDelete && (
-        <div
-          className={`confirm-delete-popup ${isAnimatingOut ? "fade-out" : "fade-in"}`}
-        >
-          <div
-            className={`confirm-delete-content ${isAnimatingOut ? "scale-out" : "scale-in"}`}
-          >
-            <p>Are you sure you want to delete this heading?</p>
-            <div className="confirm-delete-buttons">
-              <button onClick={handleConfirmDelete} className="confirm-button">
-                Confirm
-              </button>
-              <button onClick={handleCancelDelete} className="cancel-button">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmationModal
+        isOpen={showConfirmDelete}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        title="Delete Sub-subheading"
+        message="Are you sure you want to delete this sub-subheading?"
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 }
