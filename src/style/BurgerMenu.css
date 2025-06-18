@@ -1,0 +1,113 @@
+.burger-menu {
+  display: block;
+  position: relative;
+}
+
+.burger-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+  z-index: 1001;
+}
+
+.burger-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.burger-content {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  padding: 80px var(--spacing-md) var(--spacing-md);
+  backdrop-filter: blur(8px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  transition: right var(--transition-normal) ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.burger-content.open {
+  right: 0;
+  animation: slideInRight var(--transition-normal) ease-out;
+}
+
+.burger-content .navbar-controls {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.burger-content .navbar-buttons {
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.burger-content .nav-button {
+  width: 100%;
+  text-align: left;
+  padding: var(--spacing-md);
+  font-size: var(--font-size-content);
+  justify-content: flex-start;
+}
+
+.burger-content .navbar-right {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-lg);
+  margin-left: 0;
+}
+
+.burger-content .nav-links {
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.burger-content .nav-link {
+  padding: var(--spacing-md);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+}
+
+.burger-content .theme-selector {
+  width: 100%;
+}
+
+.burger-content .theme-selector select {
+  width: 100%;
+  padding: var(--spacing-md);
+  font-size: var(--font-size-content);
+}
+
+/* Hide burger menu on desktop */
+@media (min-width: 1210px) {
+  .burger-menu {
+    display: none;
+  }
+}
+
+/* Overlay for mobile menu */
+.burger-content.open::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 280px;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}

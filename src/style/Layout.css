@@ -1,0 +1,23 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+.main-content {
+  flex: 1;
+  width: 90vw;
+  padding-top: 60px;
+  padding-left: 0;
+  padding-right: 0;
+  animation: fadeInUp var(--transition-slow) ease-out;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding-top: 80px;
+  }
+}

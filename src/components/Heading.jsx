@@ -48,7 +48,6 @@ function Heading({
       className="heading-container"
       style={{
         borderColor: theme.colors.border,
-        backgroundColor: theme.colors.surface,
       }}
     >
       <h2>

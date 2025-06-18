@@ -1,0 +1,111 @@
+.notes-page {
+  width: 100vw;
+  min-height: calc(100vh - 60px);
+  padding: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  position: relative;
+}
+
+.notes-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.notes-container {
+  max-width: none;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.notes-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-align: left;
+  padding: 0;
+  width: 100%;
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  animation: fadeInUp var(--transition-slow) ease-out;
+}
+
+.empty-state p {
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .notes-page {
+    padding: var(--spacing-lg);
+  }
+
+  .notes-inner {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .notes-page {
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-xl);
+  }
+
+  .notes-container {
+    max-width: 1200px;
+  }
+
+  .notes-inner {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    gap: var(--spacing-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .notes-page {
+    /* padding: var(--spacing-2xl); */
+  }
+
+  .notes-inner {
+    /* padding: var(--spacing-2xl) var(--spacing-xl); */
+  }
+}
+
+/* Add subtle paper texture */
+.notes-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.2;
+}

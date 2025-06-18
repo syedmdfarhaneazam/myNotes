@@ -74,7 +74,7 @@ function Content({
         </button>
 
         {showCommentInput && (
-          <input-air
+          <textarea
             type="text"
             value={comment || ""}
             onChange={(e) => onCommentChange(id, e.target.value)}

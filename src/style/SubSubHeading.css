@@ -1,0 +1,159 @@
+.subsubheading-container {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin: 0;
+  position: relative;
+  animation: fadeInUp var(--transition-normal) ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+  transition: all var(--transition-fast);
+  width: 95vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.subsubheading-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.subsubheading-container:hover {
+  transform: translateY(-1px);
+  border-bottom-width: 1.5px;
+}
+
+.subsubheading-container h4 {
+  margin: 0;
+  width: 80%;
+  font-family: var(--font-handwriting-bold);
+  font-weight: 500;
+}
+
+.subsubheading-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-handwriting-bold);
+  font-size: var(--font-size-subsubheading);
+  font-weight: 500;
+  line-height: 1.4;
+  resize: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  transition: all var(--transition-fast);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+.subsubheading-input::placeholder {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.subsubheading-input:focus {
+  outline: none;
+  transform: scale(1.005);
+}
+
+.subsubheading-comment-display {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-small);
+  font-style: italic;
+  opacity: 0.8;
+  animation: fadeInDown var(--transition-fast) ease-out;
+}
+
+.subsubheading-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  opacity: 0;
+  transform: translateX(6px);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.subsubheading-container:hover .subsubheading-controls,
+.subsubheading-container:focus-within .subsubheading-controls {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.subsubheading-controls button {
+  padding: var(--spacing-xs);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(2px);
+}
+
+.subsubheading-controls button:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: var(--shadow-sm);
+}
+
+.subsubheading-comment-enter {
+  position: absolute;
+  top: 100%;
+  left: var(--spacing-lg);
+  right: var(--spacing-lg);
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border: 1px solid;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-small);
+  transition: all var(--transition-fast);
+  animation: slideInDown var(--transition-fast) ease-out;
+  z-index: 10;
+}
+
+.subsubheading-comment-enter:focus {
+  transform: scale(1.005);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .subsubheading-input {
+    font-size: clamp(1.125rem, 4vw, 1.75rem);
+  }
+
+  .subsubheading-controls {
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .subsubheading-controls button {
+    font-size: 0.7rem;
+    padding: 2px 4px;
+  }
+}
+@media (max-width: 1210px) {
+  .subsubheading-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .subsubheading-controls button {
+    padding: var(--spacing-xs) var(--spacing-xs);
+  }
+  .subsubheading-comment-enter {
+    position: absolute;
+    width: 500%;
+    transform: translateX(-100%) translateY(-100%);
+  }
+}

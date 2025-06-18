@@ -1,0 +1,169 @@
+.subject-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  min-width: 200px;
+}
+
+.subject-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  animation: slideInLeft var(--transition-normal) ease-out;
+}
+
+.subject-dropdown {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.subject-dropdown:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.subject-dropdown:focus {
+  outline: none;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-dropdown);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.subject-dropdown option {
+  background: var(--bg-color, #1f2937);
+  color: var(--text-color, #f9fafb);
+  padding: var(--spacing-sm);
+  font-family: var(--font-handwriting);
+  animation: fadeInDown var(--transition-fast) ease-out;
+}
+
+.delete-subject {
+  padding: var(--spacing-sm);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: var(--border-radius-md);
+  background: rgba(220, 38, 38, 0.1);
+  color: #ef4444;
+  cursor: pointer;
+  font-size: var(--font-size-content);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-subject:hover {
+  transform: translateY(-2px) scale(1.1);
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+.add-subject-form {
+  display: flex;
+  gap: var(--spacing-sm);
+  animation: slideInDown var(--transition-normal) ease-out;
+}
+
+.subject-input {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.subject-input:focus {
+  outline: none;
+  transform: scale(1.02);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.subject-input::placeholder {
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.submit-subject {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--border-radius-md);
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  cursor: pointer;
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.submit-subject:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .subject-selector {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .subject-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subject-dropdown {
+    width: 100%;
+    font-size: var(--font-size-small);
+  }
+
+  .delete-subject {
+    align-self: center;
+    min-width: 35px;
+    height: 35px;
+  }
+
+  .add-subject-form {
+    flex-direction: column;
+  }
+
+  .submit-subject {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .subject-dropdown,
+  .subject-input,
+  .submit-subject {
+    font-size: var(--font-size-small);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}

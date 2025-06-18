@@ -32,10 +32,7 @@ function Navbar() {
       }}
     >
       <div className="navbar-brand">
-        <h1>{userName}</h1>
-      </div>
-
-      <div className="navbar-menu">
+        <h1>{userName}</h1>{" "}
         <BurgerMenu>
           {isNotesPage && (
             <div className="navbar-controls">
@@ -150,14 +147,21 @@ function Navbar() {
         </BurgerMenu>
         <div className="navbar-desktop">
           {isNotesPage && (
+            <Subject
+              subjects={subjects}
+              currentSubjectId={currentSubjectId}
+              setCurrentSubjectId={setCurrentSubjectId}
+              addSubject={addSubject}
+              deleteSubject={deleteSubject}
+            />
+          )}
+        </div>
+      </div>
+
+      <div className="navbar-menu">
+        <div className="navbar-desktop">
+          {isNotesPage && (
             <div className="navbar-controls">
-              <Subject
-                subjects={subjects}
-                currentSubjectId={currentSubjectId}
-                setCurrentSubjectId={setCurrentSubjectId}
-                addSubject={addSubject}
-                deleteSubject={deleteSubject}
-              />
               <div className="navbar-buttons">
                 <button
                   className="nav-button"

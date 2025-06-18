@@ -78,10 +78,10 @@ const Code = ({
         </select>
 
         <div className="code-actions">
-          <ColorPicker
-            currentColor={color}
-            onColorChange={(newColor) => onColorChange(id, newColor)}
-          />
+          {/* <ColorPicker */}
+          {/*   currentColor={color} */}
+          {/*   onColorChange={(newColor) => onColorChange(id, newColor)} */}
+          {/* /> */}
           <button
             onClick={() => onMoveUp(id)}
             disabled={id === 0}
