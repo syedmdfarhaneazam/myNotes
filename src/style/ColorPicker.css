@@ -1,7 +1,7 @@
 .color-picker-container {
   display: flex;
   position: relative;
-  z-index: 5;
+  z-index: 1500;
   display: inline-block;
 }
 
@@ -34,8 +34,8 @@
 
 .color-picker-dropdown {
   position: absolute;
-  top: 100%;
-  left: 50%;
+  top: -20%;
+  right: 0%;
   transform: translateX(-50%);
   z-index: var(--z-color-picker);
   background: rgba(255, 255, 255, 0.95);
