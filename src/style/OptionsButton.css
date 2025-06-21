@@ -1,0 +1,117 @@
+.options-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.options-toggle {
+  padding: var(--spacing-xs);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.options-toggle:hover {
+  transform: translateY(-1px) scale(1.1);
+  box-shadow: var(--shadow-sm);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.options-toggle.active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(45deg);
+}
+
+.options-menu {
+  position: absolute;
+  top: 0;
+  right: 35px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xs);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-options);
+  white-space: nowrap;
+}
+
+.options-menu.open {
+  animation: expandOptions var(--transition-normal) ease-out;
+}
+
+.options-menu.closing {
+  animation: collapseOptions var(--transition-normal) ease-out;
+}
+
+.options-menu button {
+  padding: var(--spacing-xs);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(2px);
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.options-menu button:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: var(--shadow-sm);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.options-menu button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .options-toggle {
+    width: 25px;
+    height: 25px;
+    font-size: 0.7rem;
+  }
+
+  .options-menu {
+    right: 30px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .options-menu button {
+    min-width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+  .options-menu {
+    background: rgba(31, 41, 55, 0.95);
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+}

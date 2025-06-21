@@ -97,7 +97,30 @@ function ProfilePage() {
             </button>
           </div>
         </div>
-
+        <div className="profile-section">
+          <h3>Keyboard Shortcuts</h3>
+          <p>Enhance your productivity with these shortcuts:</p>
+          <div className="shortcuts-list">
+            <p>
+              <kbd>Alt+P</kbd>: Go to Profile
+            </p>
+            <p>
+              <kbd>Alt+H</kbd>: Add Heading
+            </p>
+            <p>
+              <kbd>Alt+S</kbd>: Add SubHeading
+            </p>
+            <p>
+              <kbd>Alt+X</kbd>: Add SubSubHeading
+            </p>
+            <p>
+              <kbd>Alt+C</kbd>: Add Content
+            </p>
+            <p>
+              <kbd>Alt+D</kbd>: Add Code
+            </p>
+          </div>
+        </div>
         <div className="profile-section">
           <h3>Data Management</h3>
 

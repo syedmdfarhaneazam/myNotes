@@ -17,7 +17,7 @@ function BurgerMenu({ children }) {
         onClick={toggleMenu}
         style={{ color: theme.colors.text }}
       >
-        {isOpen ? "✖" : "☰"}
+        <i className={`fas ${isOpen ? "fa-times" : "fa-bars"}`}></i>
       </button>
       <div
         className={`burger-content ${isOpen ? "open" : ""}`}

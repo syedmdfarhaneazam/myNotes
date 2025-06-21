@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ConfirmationModal from "./ConfirmationModal";
 import { useTheme } from "../context/ThemeContext";
 import "../style/Subject.css";
 
@@ -13,12 +12,14 @@ function Subject({
   const { theme } = useTheme();
   const [newSubjectName, setNewSubjectName] = useState("");
   const [showInput, setShowInput] = useState(false);
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const handleSelectChange = (e) => {
     const value = e.target.value;
     if (value === "add-subject") {
       setShowInput(true);
+    } else if (value === "") {
+      // Handle empty selection
+      setShowInput(false);
     } else {
       setCurrentSubjectId(Number(value));
       setShowInput(false);
@@ -35,27 +36,24 @@ function Subject({
   };
 
   const handleDeleteClick = () => {
-    setShowConfirmDelete(true);
+    if (currentSubjectId && subjects.length > 1) {
+      const confirmed = window.confirm(
+        `Are you sure you want to delete this subject?`,
+      );
+      if (confirmed) {
+        deleteSubject(currentSubjectId);
+      }
+    }
   };
 
-  const handleConfirmDelete = () => {
-    deleteSubject(currentSubjectId);
-    setShowConfirmDelete(false);
-  };
-
-  const handleCancelDelete = () => {
-    setShowConfirmDelete(false);
-  };
-
-  const currentSubject = subjects.find(
-    (subject) => subject.id === currentSubjectId,
-  );
+  // Convert null to empty string for React select
+  const selectValue = currentSubjectId === null ? "" : String(currentSubjectId);
 
   return (
     <div className="subject-selector">
       <div className="subject-controls">
         <select
-          value={currentSubjectId}
+          value={selectValue}
           onChange={handleSelectChange}
           className="subject-dropdown"
           style={{
@@ -64,6 +62,9 @@ function Subject({
             borderColor: theme.colors.primary,
           }}
         >
+          {currentSubjectId === null && (
+            <option value="">Select a subject</option>
+          )}
           {subjects.map((subject) => (
             <option key={subject.id} value={subject.id}>
               {subject.name}
@@ -71,13 +72,16 @@ function Subject({
           ))}
           <option value="add-subject">+ Add a Subject</option>
         </select>
-        <button
-          onClick={handleDeleteClick}
-          className="delete-subject"
-          title="Delete subject"
-        >
-          🗑️
-        </button>
+
+        {currentSubjectId && subjects.length > 1 && (
+          <button
+            onClick={handleDeleteClick}
+            className="delete-subject"
+            title="Delete subject"
+          >
+            <i className="fas fa-trash"></i>
+          </button>
+        )}
       </div>
 
       {showInput && (
@@ -93,6 +97,7 @@ function Subject({
               color: theme.colors.text,
               borderColor: theme.colors.primary,
             }}
+            autoFocus
           />
           <button
             type="submit"
@@ -106,16 +111,6 @@ function Subject({
           </button>
         </form>
       )}
-
-      <ConfirmationModal
-        isOpen={showConfirmDelete}
-        onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
-        title="Delete Subject"
-        message={`Are you sure you want to delete "${currentSubject?.name}"?`}
-        confirmText="Delete"
-        cancelText="Cancel"
-      />
     </div>
   );
 }

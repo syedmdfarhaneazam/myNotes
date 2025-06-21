@@ -32,17 +32,22 @@ function Navbar() {
       }}
     >
       <div className="navbar-brand">
-        <h1>{userName}</h1>{" "}
+        <h1>{userName}</h1>
+        {isNotesPage && (
+          <Subject
+            subjects={subjects}
+            currentSubjectId={currentSubjectId}
+            setCurrentSubjectId={setCurrentSubjectId}
+            addSubject={addSubject}
+            deleteSubject={deleteSubject}
+          />
+        )}
+      </div>
+
+      <div className="navbar-menu">
         <BurgerMenu>
           {isNotesPage && (
             <div className="navbar-controls">
-              <Subject
-                subjects={subjects}
-                currentSubjectId={currentSubjectId}
-                setCurrentSubjectId={setCurrentSubjectId}
-                addSubject={addSubject}
-                deleteSubject={deleteSubject}
-              />
               <div className="navbar-buttons">
                 <button
                   className="nav-button"
@@ -52,7 +57,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Heading
+                  <i className="fas fa-heading"></i> Heading
                 </button>
                 <button
                   className="nav-button"
@@ -62,7 +67,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + SubHeading
+                  <i className="fas fa-heading"></i> SubHeading
                 </button>
                 <button
                   className="nav-button"
@@ -72,7 +77,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + SubSubHeading
+                  <i className="fas fa-heading"></i> SubSubHeading
                 </button>
                 <button
                   className="nav-button"
@@ -82,7 +87,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Content
+                  <i className="fas fa-paragraph"></i> Content
                 </button>
                 <button
                   className="nav-button"
@@ -92,7 +97,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Code
+                  <i className="fas fa-code"></i> Code
                 </button>
                 <button
                   className="nav-button"
@@ -102,7 +107,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Image
+                  <i className="fas fa-image"></i> Image
                 </button>
               </div>
             </div>
@@ -133,34 +138,20 @@ function Navbar() {
                 className="nav-link"
                 style={{ color: theme.colors.text }}
               >
-                Notes
+                <i className="fas fa-sticky-note"></i> Notes
               </Link>
               <Link
                 to="/profile"
                 className="nav-link"
                 style={{ color: theme.colors.text }}
               >
-                Profile
+                <i className="fas fa-user"></i> Profile
               </Link>
             </div>
           </div>
         </BurgerMenu>
         <div className="navbar-desktop">
           {isNotesPage && (
-            <Subject
-              subjects={subjects}
-              currentSubjectId={currentSubjectId}
-              setCurrentSubjectId={setCurrentSubjectId}
-              addSubject={addSubject}
-              deleteSubject={deleteSubject}
-            />
-          )}
-        </div>
-      </div>
-
-      <div className="navbar-menu">
-        <div className="navbar-desktop">
-          {isNotesPage && (
             <div className="navbar-controls">
               <div className="navbar-buttons">
                 <button
@@ -171,7 +162,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Heading
+                  <i className="fas fa-heading"></i> Heading
                 </button>
                 <button
                   className="nav-button"
@@ -181,7 +172,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + SubHeading
+                  <i className="fas fa-heading"></i> SubHeading
                 </button>
                 <button
                   className="nav-button"
@@ -191,7 +182,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + SubSubHeading
+                  <i className="fas fa-heading"></i> SubSubHeading
                 </button>
                 <button
                   className="nav-button"
@@ -201,7 +192,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Content
+                  <i className="fas fa-paragraph"></i> Content
                 </button>
                 <button
                   className="nav-button"
@@ -211,7 +202,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Code
+                  <i className="fas fa-code"></i> Code
                 </button>
                 <button
                   className="nav-button"
@@ -221,7 +212,7 @@ function Navbar() {
                     color: theme.colors.text,
                   }}
                 >
-                  + Image
+                  <i className="fas fa-image"></i> Image
                 </button>
               </div>
             </div>
@@ -252,14 +243,14 @@ function Navbar() {
                 className="nav-link"
                 style={{ color: theme.colors.text }}
               >
-                Notes
+                <i className="fas fa-sticky-note"></i> Notes
               </Link>
               <Link
                 to="/profile"
                 className="nav-link"
                 style={{ color: theme.colors.text }}
               >
-                Profile
+                <i className="fas fa-user"></i> Profile
               </Link>
             </div>
           </div>

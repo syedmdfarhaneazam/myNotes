@@ -1,16 +1,13 @@
-import { useState, useRef, useEffect } from "react";
-import ColorPicker from "./ColorPicker";
-import ConfirmationModal from "./ConfirmationModal";
+import { useState, useRef } from "react";
+import OptionsButton from "./OptionsButton";
 import { useTheme } from "../context/ThemeContext";
 import "../style/AddImage.css";
 
 function AddImage({
   id,
   value,
-  comment,
   color,
   onChange,
-  onCommentChange,
   onColorChange,
   onDelete,
   onMoveUp,
@@ -18,8 +15,6 @@ function AddImage({
 }) {
   const { theme } = useTheme();
   const [imagePreview, setImagePreview] = useState(value || "");
-  const [showCommentInput, setShowCommentInput] = useState(false);
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const fileInputRef = useRef();
 
   const handleImageChange = (e) => {
@@ -34,98 +29,58 @@ function AddImage({
     reader.readAsDataURL(file);
   };
 
-  const handleDeleteClick = () => {
-    setShowConfirmDelete(true);
-  };
-
-  const handleConfirmDelete = () => {
-    onDelete(id);
-    setShowConfirmDelete(false);
-  };
-
-  const handleCancelDelete = () => {
-    setShowConfirmDelete(false);
-  };
-
   return (
     <div
       className="image-container"
       style={{ borderColor: theme.colors.primary }}
     >
-      {imagePreview ? (
-        <img
-          src={imagePreview || "/placeholder.svg"}
-          alt="Uploaded"
-          className="preview-img"
-        />
-      ) : (
-        <p style={{ color: theme.colors.text }}>No image uploaded.</p>
-      )}
+      <div className="image-content">
+        <div className="image-preview-area">
+          {imagePreview ? (
+            <img
+              src={imagePreview || "/placeholder.svg"}
+              alt="Uploaded"
+              className="preview-img"
+            />
+          ) : (
+            <p style={{ color: theme.colors.text }}>No image uploaded.</p>
+          )}
 
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        onChange={handleImageChange}
-        style={{ display: "none" }}
-      />
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+          />
 
-      <div className="image-controls">
-        <ColorPicker
+          <button
+            className="upload-button"
+            onClick={() => fileInputRef.current.click()}
+            title="Upload image"
+            style={{
+              marginTop: "16px",
+              padding: "8px 16px",
+              backgroundColor: theme.colors.primary,
+              color: theme.colors.text,
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+            }}
+          >
+            <i className="fas fa-camera"></i> Upload Image
+          </button>
+        </div>
+
+        <OptionsButton
+          id={id}
+          onColorChange={onColorChange}
+          onDelete={onDelete}
+          onMoveUp={onMoveUp}
+          onMoveDown={onMoveDown}
           currentColor={color}
-          onColorChange={(newColor) => onColorChange(id, newColor)}
         />
-
-        <button
-          className="upload-button"
-          onClick={() => fileInputRef.current.click()}
-          title="Upload image"
-        >
-          📷
-        </button>
-
-        <button onClick={handleDeleteClick} title="Delete">
-          🗑️
-        </button>
-        <button onClick={() => onMoveUp(id)} title="Move up">
-          ⬆️
-        </button>
-        <button onClick={() => onMoveDown(id)} title="Move down">
-          ⬇️
-        </button>
-
-        <button
-          onClick={() => setShowCommentInput(!showCommentInput)}
-          title={showCommentInput ? "Hide comment" : "Add comment"}
-        >
-          {showCommentInput ? "✖️" : "💭"}
-        </button>
       </div>
-
-      {showCommentInput && (
-        <input
-          type="text"
-          value={comment || ""}
-          onChange={(e) => onCommentChange(id, e.target.value)}
-          placeholder="Enter comment"
-          className="image-comment"
-          style={{
-            backgroundColor: theme.colors.background,
-            color: theme.colors.text,
-            borderColor: theme.colors.primary,
-          }}
-        />
-      )}
-
-      <ConfirmationModal
-        isOpen={showConfirmDelete}
-        onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
-        title="Delete Image"
-        message="Are you sure you want to delete this image?"
-        confirmText="Delete"
-        cancelText="Cancel"
-      />
     </div>
   );
 }

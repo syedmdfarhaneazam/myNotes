@@ -65,7 +65,15 @@
     padding: var(--spacing-lg) var(--spacing-md);
   }
 }
+@media (max-width: 640px) {
+  .notes-page {
+    transform: translateY(2%);
+  }
 
+  .notes-inner {
+    padding: var(--spacing-xs) var(--spacing-xs);
+  }
+}
 @media (min-width: 768px) {
   .notes-page {
     min-height: calc(100vh - 80px);

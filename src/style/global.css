@@ -1,5 +1,6 @@
-/* Import handwriting fonts */
+/* Import handwriting fonts and Font Awesome */
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&family=Patrick+Hand&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 /* CSS Variables for theming and responsive design */
 :root {
@@ -8,20 +9,20 @@
   --font-handwriting-bold: "Caveat", cursive;
 
   /* Font sizes - responsive */
-  --font-size-heading: clamp(2rem, 4vw, 3.5rem);
-  --font-size-subheading: clamp(1.5rem, 3vw, 2.5rem);
-  --font-size-subsubheading: clamp(1.25rem, 2.5vw, 2rem);
-  --font-size-content: clamp(1rem, 2vw, 1.25rem);
-  --font-size-code: clamp(0.875rem, 1.8vw, 1.125rem);
-  --font-size-small: clamp(0.75rem, 1.5vw, 1rem);
+  --font-size-heading: clamp(1.6rem, 3.2vw, 2.8rem);
+  --font-size-subheading: clamp(1.2rem, 2.4vw, 2rem);
+  --font-size-subsubheading: clamp(1rem, 2vw, 1.6rem);
+  --font-size-content: clamp(0.8rem, 1.6vw, 1rem);
+  --font-size-code: clamp(0.7rem, 1.44vw, 0.9rem);
+  --font-size-small: clamp(0.6rem, 1.2vw, 0.8rem);
 
   /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
+  --spacing-xs: 0.2rem;
+  --spacing-sm: 0.4rem;
+  --spacing-md: 0.8rem;
+  --spacing-lg: 1.2rem;
+  --spacing-xl: 1.6rem;
+  --spacing-2xl: 2.4rem;
 
   /* Border radius */
   --border-radius-sm: 4px;
@@ -43,7 +44,7 @@
 
   /* Breakpoints */
   --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
+  --breakpoint-md: 750px; /* Updated to 750px */
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
@@ -52,7 +53,8 @@
   --z-modal: 2500;
   --z-modal-overlay: 2000;
   --z-navbar: 1000;
-  --z-color-picker: 1600;
+  --z-color-picker: 1800; /* Higher z-index for color picker */
+  --z-options: 1600;
 }
 
 /* Reset and base styles */
@@ -136,13 +138,29 @@ body {
   }
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
+@keyframes expandOptions {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateX(10px);
+    max-width: 0;
   }
-  50% {
-    transform: scale(1.05);
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    max-width: 300px;
+  }
+}
+
+@keyframes collapseOptions {
+  from {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    max-width: 300px;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8) translateX(10px);
+    max-width: 0;
   }
 }
 

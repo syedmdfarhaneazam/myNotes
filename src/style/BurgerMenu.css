@@ -93,8 +93,7 @@
   font-size: var(--font-size-content);
 }
 
-/* Hide burger menu on desktop */
-@media (min-width: 1210px) {
+@media (min-width: 750px) {
   .burger-menu {
     display: none;
   }

@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: var(--z-navbar);
   padding: var(--spacing-sm) var(--spacing-md);
   backdrop-filter: blur(4px);
   background: rgba(255, 255, 255, 0.08);
@@ -12,12 +12,21 @@
   font-family: var(--font-handwriting);
 }
 
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
 .navbar-brand h1 {
   font-family: var(--font-handwriting-bold);
   font-size: var(--font-size-subheading);
   font-weight: 700;
   margin: 0;
   animation: slideInLeft var(--transition-normal) ease-out;
+  transition: font-size var(--transition-fast);
 }
 
 .navbar-menu {
@@ -28,25 +37,11 @@
   gap: var(--spacing-lg);
 }
 
-.navbar-brand {
-  flex-shrink: 0;
-  display: flex;
-}
-
-.navbar-brand h1 {
-  font-family: var(--font-handwriting-bold);
-  font-size: var(--font-size-subheading);
-  font-weight: 700;
-  margin: 0;
-  width: 300%;
-  animation: slideInLeft var(--transition-normal) ease-out;
-}
-
 /* Desktop navbar */
 .navbar-desktop {
   display: none;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-lg);
   width: 100%;
 }
 
@@ -159,8 +154,8 @@
   width: 80%;
 }
 
-/* Desktop view */
-@media (min-width: 1210px) {
+/* Normal sizing until 1250px */
+@media (min-width: 750px) {
   .navbar {
     padding: var(--spacing-md) var(--spacing-xl);
   }
@@ -171,6 +166,8 @@
 
   .navbar-brand {
     margin-right: var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
   }
 
   .nav-button {
@@ -180,6 +177,44 @@
 
   .nav-links {
     gap: var(--spacing-lg);
+  }
+}
+
+/* Start reducing sizes from 1250px to 750px */
+@media (max-width: 1250px) and (min-width: 750px) {
+  .navbar {
+    padding: calc(var(--spacing-md) * 0.8) calc(var(--spacing-xl) * 0.8);
+  }
+
+  .navbar-brand h1 {
+    font-size: clamp(1.2rem, 3vw, var(--font-size-subheading));
+  }
+
+  .nav-button {
+    padding: calc(var(--spacing-xs) * 0.8) calc(var(--spacing-sm) * 0.8);
+    font-size: clamp(0.8rem, 2vw, var(--font-size-content));
+  }
+
+  .navbar-controls {
+    gap: calc(var(--spacing-md) * 0.8);
+  }
+
+  .navbar-buttons {
+    gap: calc(var(--spacing-sm) * 0.8);
+  }
+
+  .theme-selector select {
+    padding: calc(var(--spacing-xs) * 0.8) calc(var(--spacing-sm) * 0.8);
+    font-size: clamp(0.8rem, 2vw, var(--font-size-small));
+  }
+
+  .nav-links {
+    gap: calc(var(--spacing-md) * 0.8);
+  }
+
+  .nav-link {
+    font-size: clamp(0.9rem, 2vw, var(--font-size-content));
+    padding: calc(var(--spacing-xs) * 0.8) calc(var(--spacing-sm) * 0.8);
   }
 }
 

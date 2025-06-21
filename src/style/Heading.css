@@ -1,9 +1,9 @@
 .heading-container {
-  background: transparent;
+  background: transparent !important;
+  padding: var(--spacing-xs) var(--spacing-xs);
   border: none;
   border-bottom: 1px solid;
   border-radius: 0;
-  padding: var(--spacing-md) var(--spacing-lg);
   margin: 0;
   position: relative;
   animation: fadeInUp var(--transition-normal) ease-out;
@@ -13,6 +13,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--spacing-md);
+  z-index: 0;
 }
 
 .heading-content {
@@ -145,6 +146,6 @@
   .heading-comment-enter {
     position: absolute;
     width: 500%;
-    transform: translateX(-100%) translateY(-100%);
+    transform: translateX(0%) translateY(-100%);
   }
 }

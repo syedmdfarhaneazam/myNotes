@@ -3,7 +3,7 @@
   border: none;
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
   border-radius: 0;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-xs) var(--spacing-xs);
   margin: 0;
   position: relative;
   animation: fadeInUp var(--transition-normal) ease-out;

@@ -10,14 +10,7 @@ import "../style/NotesPage.css";
 
 function NotesPage() {
   const { theme } = useTheme();
-  const {
-    notes,
-    updateNote,
-    updateComment,
-    updateColor,
-    deleteNote,
-    moveNote,
-  } = useNotes();
+  const { notes, updateNote, updateColor, deleteNote, moveNote } = useNotes();
 
   return (
     <div className="notes-page">
@@ -39,10 +32,8 @@ function NotesPage() {
                 key: note.id,
                 id: note.id,
                 value: note.value,
-                comment: note.comment,
                 color: note.color || "#000000",
                 onChange: updateNote,
-                onCommentChange: updateComment,
                 onColorChange: updateColor,
                 onDelete: deleteNote,
                 onMoveUp: () => moveNote(note.id, -1),

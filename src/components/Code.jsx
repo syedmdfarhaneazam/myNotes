@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AceEditor from "react-ace";
-import ColorPicker from "./ColorPicker";
-import ConfirmationModal from "./ConfirmationModal";
+import OptionsButton from "./OptionsButton";
 import { useTheme } from "../context/ThemeContext";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-javascript";
@@ -14,10 +13,8 @@ const Code = ({
   id,
   value,
   language,
-  comment,
   color,
   onChange,
-  onCommentChange,
   onColorChange,
   onDelete,
   onMoveUp,
@@ -27,7 +24,6 @@ const Code = ({
   const [selectedLanguage, setSelectedLanguage] = useState(
     language || "javascript",
   );
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const handleLanguageChange = (e) => {
     const newLanguage = e.target.value;
@@ -37,19 +33,6 @@ const Code = ({
 
   const handleCodeChange = (newValue) => {
     onChange(id, newValue, selectedLanguage);
-  };
-
-  const handleDeleteClick = () => {
-    setShowConfirmDelete(true);
-  };
-
-  const handleConfirmDelete = () => {
-    onDelete(id);
-    setShowConfirmDelete(false);
-  };
-
-  const handleCancelDelete = () => {
-    setShowConfirmDelete(false);
   };
 
   return (
@@ -77,25 +60,14 @@ const Code = ({
           <option value="sh">Bash</option>
         </select>
 
-        <div className="code-actions">
-          {/* <ColorPicker */}
-          {/*   currentColor={color} */}
-          {/*   onColorChange={(newColor) => onColorChange(id, newColor)} */}
-          {/* /> */}
-          <button
-            onClick={() => onMoveUp(id)}
-            disabled={id === 0}
-            title="Move up"
-          >
-            ↑
-          </button>
-          <button onClick={() => onMoveDown(id)} title="Move down">
-            ↓
-          </button>
-          <button onClick={handleDeleteClick} title="Delete">
-            🗑️
-          </button>
-        </div>
+        <OptionsButton
+          id={id}
+          onColorChange={onColorChange}
+          onDelete={onDelete}
+          onMoveUp={onMoveUp}
+          onMoveDown={onMoveDown}
+          currentColor={color}
+        />
       </div>
 
       <AceEditor
@@ -113,28 +85,6 @@ const Code = ({
           wrap: true,
         }}
         style={{ width: "100%", minHeight: "200px" }}
-      />
-
-      <textarea
-        className="code-comment"
-        placeholder="Add a comment..."
-        value={comment}
-        onChange={(e) => onCommentChange(id, e.target.value)}
-        style={{
-          backgroundColor: theme.colors.background,
-          color: theme.colors.text,
-          borderColor: theme.colors.primary,
-        }}
-      />
-
-      <ConfirmationModal
-        isOpen={showConfirmDelete}
-        onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
-        title="Delete Code"
-        message="Are you sure you want to delete this code snippet?"
-        confirmText="Delete"
-        cancelText="Cancel"
       />
     </div>
   );
