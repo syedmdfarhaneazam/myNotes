@@ -14,6 +14,25 @@
   padding-left: 0;
   padding-right: 0;
   animation: fadeInUp var(--transition-slow) ease-out;
+  margin-bottom: 40%;
+}
+.scroll-down-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  padding: 0 0;
+  cursor: pointer;
+  z-index: var(--z-navbar);
+  transition: background-color var(--transition-normal);
+}
+
+.scroll-down-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 @media (min-width: 768px) {

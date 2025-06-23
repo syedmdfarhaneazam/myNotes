@@ -102,6 +102,9 @@ function ProfilePage() {
           <p>Enhance your productivity with these shortcuts:</p>
           <div className="shortcuts-list">
             <p>
+              <kbd>Alt+N</kbd>: Go to Notes
+            </p>
+            <p>
               <kbd>Alt+P</kbd>: Go to Profile
             </p>
             <p>
@@ -118,6 +121,9 @@ function ProfilePage() {
             </p>
             <p>
               <kbd>Alt+D</kbd>: Add Code
+            </p>
+            <p>
+              <kbd>Alt+G</kbd>: Go to end of the page
             </p>
           </div>
         </div>

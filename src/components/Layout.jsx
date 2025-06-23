@@ -4,6 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 import { useNotes } from "../context/NotesContext";
 import { useEffect } from "react";
 import "../style/Layout.css";
+import Help from "./Help";
 
 function Layout() {
   const { theme } = useTheme();
@@ -18,6 +19,9 @@ function Layout() {
         switch (event.key.toLowerCase()) {
           case "p":
             navigate("/profile");
+            break;
+          case "n":
+            navigate("/notes");
             break;
           case "h":
             addNote("Heading");
@@ -34,6 +38,9 @@ function Layout() {
           case "d":
             addNote("Code");
             break;
+          case "g":
+            window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+            break;
           default:
             break;
         }
@@ -41,11 +48,12 @@ function Layout() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [addNote, navigate]);
+
+  const scrollDown = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+  };
 
   return (
     <div
@@ -58,7 +66,11 @@ function Layout() {
       <Navbar />
       <main className="main-content">
         <Outlet />
+        <button className="scroll-down-btn" onClick={scrollDown}>
+          ⬇
+        </button>
       </main>
+      <Help />
     </div>
   );
 }
