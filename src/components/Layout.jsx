@@ -23,19 +23,19 @@ function Layout() {
           case "n":
             navigate("/notes");
             break;
-          case "h":
+          case "1":
             addNote("Heading");
             break;
-          case "s":
+          case "2":
             addNote("SubHeading");
             break;
-          case "x":
+          case "3":
             addNote("SubSubHeading");
             break;
-          case "c":
+          case "4":
             addNote("Content");
             break;
-          case "d":
+          case "5":
             addNote("Code");
             break;
           case "g":
