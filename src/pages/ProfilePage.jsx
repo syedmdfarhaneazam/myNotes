@@ -108,19 +108,19 @@ function ProfilePage() {
               <kbd>Alt+P</kbd>: Go to Profile
             </p>
             <p>
-              <kbd>Alt+H</kbd>: Add Heading
+              <kbd>Alt+1</kbd>: Add Heading
             </p>
             <p>
-              <kbd>Alt+S</kbd>: Add SubHeading
+              <kbd>Alt+2</kbd>: Add SubHeading
             </p>
             <p>
-              <kbd>Alt+X</kbd>: Add SubSubHeading
+              <kbd>Alt+3</kbd>: Add SubSubHeading
             </p>
             <p>
-              <kbd>Alt+C</kbd>: Add Content
+              <kbd>Alt+4</kbd>: Add Content
             </p>
             <p>
-              <kbd>Alt+D</kbd>: Add Code
+              <kbd>Alt+5</kbd>: Add Code
             </p>
             <p>
               <kbd>Alt+G</kbd>: Go to end of the page
