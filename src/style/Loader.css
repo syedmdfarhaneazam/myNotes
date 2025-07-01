@@ -1,0 +1,70 @@
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  animation: fadeInUp var(--transition-normal) ease-out;
+}
+
+.loader-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader-spinner.small {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.loader-spinner.medium {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+.loader-spinner.large {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+.loader-message {
+  margin-top: var(--spacing-md);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  text-align: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .loader-container {
+    padding: var(--spacing-lg);
+  }
+
+  .loader-message {
+    font-size: var(--font-size-small);
+  }
+}

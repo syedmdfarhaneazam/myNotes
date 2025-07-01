@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useTheme } from "../context/ThemeContext";
+import ConfirmationModal from "./ConfirmationModal";
 import "../style/Subject.css";
 
 function Subject({
@@ -12,41 +13,58 @@ function Subject({
   const { theme } = useTheme();
   const [newSubjectName, setNewSubjectName] = useState("");
   const [showInput, setShowInput] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [subjectToDelete, setSubjectToDelete] = useState(null);
 
-  const handleSelectChange = (e) => {
-    const value = e.target.value;
-    if (value === "add-subject") {
-      setShowInput(true);
-    } else if (value === "") {
-      // Handle empty selection
-      setShowInput(false);
-    } else {
-      setCurrentSubjectId(Number(value));
-      setShowInput(false);
-    }
-  };
-
-  const handleAddSubject = (e) => {
-    e.preventDefault();
-    if (newSubjectName.trim()) {
-      addSubject(newSubjectName.trim());
-      setNewSubjectName("");
-      setShowInput(false);
-    }
-  };
-
-  const handleDeleteClick = () => {
-    if (currentSubjectId && subjects.length > 1) {
-      const confirmed = window.confirm(
-        `Are you sure you want to delete this subject?`,
-      );
-      if (confirmed) {
-        deleteSubject(currentSubjectId);
+  const handleSelectChange = useCallback(
+    (e) => {
+      const value = e.target.value;
+      if (value === "add-subject") {
+        setShowInput(true);
+      } else if (value === "") {
+        setShowInput(false);
+      } else {
+        setCurrentSubjectId(Number(value));
+        setShowInput(false);
       }
-    }
-  };
+    },
+    [setCurrentSubjectId],
+  );
 
-  // Convert null to empty string for React select
+  const handleAddSubject = useCallback(
+    (e) => {
+      e.preventDefault();
+      const trimmedName = newSubjectName.trim();
+      if (trimmedName) {
+        addSubject(trimmedName);
+        setNewSubjectName("");
+        setShowInput(false);
+      }
+    },
+    [newSubjectName, addSubject],
+  );
+
+  const handleDeleteClick = useCallback(() => {
+    if (currentSubjectId && subjects.length > 1) {
+      const subject = subjects.find((s) => s.id === currentSubjectId);
+      setSubjectToDelete(subject);
+      setShowDeleteModal(true);
+    }
+  }, [currentSubjectId, subjects]);
+
+  const confirmDelete = useCallback(() => {
+    if (subjectToDelete) {
+      deleteSubject(subjectToDelete.id);
+      setShowDeleteModal(false);
+      setSubjectToDelete(null);
+    }
+  }, [subjectToDelete, deleteSubject]);
+
+  const cancelDelete = useCallback(() => {
+    setShowDeleteModal(false);
+    setSubjectToDelete(null);
+  }, []);
+
   const selectValue = currentSubjectId === null ? "" : String(currentSubjectId);
 
   return (
@@ -111,8 +129,18 @@ function Subject({
           </button>
         </form>
       )}
+
+      <ConfirmationModal
+        isOpen={showDeleteModal}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        title="Delete Subject"
+        message={`Are you sure you want to delete "${subjectToDelete?.name}"? This action cannot be undone.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 }
 
-export default Subject;
+export default React.memo(Subject);

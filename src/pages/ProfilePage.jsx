@@ -1,71 +1,72 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useTheme } from "../context/ThemeContext";
-import { getSubjects, saveSubjects } from "../indexedDb";
+import { useNotes } from "../context/NotesContext";
+import ExportModal from "../components/ExportModal";
+import Loader from "../components/Loader";
 import "../style/ProfilePage.css";
 
 function ProfilePage() {
   const { theme, userName, changeUserName } = useTheme();
+  const { importSubjects } = useNotes();
   const [name, setName] = useState(userName);
   const [importStatus, setImportStatus] = useState("");
-  const [exportStatus, setExportStatus] = useState("");
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [isImporting, setIsImporting] = useState(false);
 
-  const handleNameChange = (e) => {
+  const handleNameChange = useCallback((e) => {
     setName(e.target.value);
-  };
+  }, []);
 
-  const saveUserName = () => {
-    changeUserName(name);
-    setExportStatus("Username updated successfully!");
-    setTimeout(() => setExportStatus(""), 3000);
-  };
+  const saveUserName = useCallback(() => {
+    const trimmedName = name.trim();
+    changeUserName(trimmedName || "My Notes");
+    setImportStatus("Username updated successfully!");
+    setTimeout(() => setImportStatus(""), 3000);
+  }, [name, changeUserName]);
 
-  const exportData = async () => {
-    try {
-      const data = await getSubjects();
-      if (!data) {
-        setExportStatus("No data to export");
-        return;
-      }
+  const handleImportData = useCallback(
+    async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-      const jsonString = JSON.stringify(data);
-      const blob = new Blob([jsonString], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
+      setIsImporting(true);
+      setImportStatus("");
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `notes-export-${new Date().toISOString().slice(0, 10)}.json`;
-      document.body.appendChild(a);
-      a.click();
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        try {
+          const data = JSON.parse(event.target.result);
+          const result = await importSubjects(data);
 
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+          if (result.success) {
+            setImportStatus(
+              `Successfully imported ${result.count} subject(s)! They have been added to your existing notes.`,
+            );
+          } else {
+            setImportStatus(`Import failed: ${result.error}`);
+          }
+        } catch (error) {
+          console.error("Import failed:", error);
+          setImportStatus(
+            "Import failed. Please check your file format and try again.",
+          );
+        } finally {
+          setIsImporting(false);
+          // Clear the file input
+          e.target.value = "";
+        }
+      };
 
-      setExportStatus("Data exported successfully!");
-      setTimeout(() => setExportStatus(""), 3000);
-    } catch (error) {
-      console.error("Export failed:", error);
-      setExportStatus("Export failed. Please try again.");
-    }
-  };
+      reader.onerror = () => {
+        setImportStatus("Failed to read file. Please try again.");
+        setIsImporting(false);
+        e.target.value = "";
+      };
 
-  const importData = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      try {
-        const data = JSON.parse(event.target.result);
-        await saveSubjects(data);
-        setImportStatus("Data imported successfully!");
-        setTimeout(() => setImportStatus(""), 3000);
-      } catch (error) {
-        console.error("Import failed:", error);
-        setImportStatus("Import failed. Please check your file format.");
-      }
-    };
-    reader.readAsText(file);
-  };
+      reader.readAsText(file);
+    },
+    [importSubjects],
+  );
 
   return (
     <div className="profile-page" style={{ color: theme.colors.text }}>
@@ -97,6 +98,7 @@ function ProfilePage() {
             </button>
           </div>
         </div>
+
         <div className="profile-section">
           <h3>Keyboard Shortcuts</h3>
           <p>Enhance your productivity with these shortcuts:</p>
@@ -127,50 +129,70 @@ function ProfilePage() {
             </p>
           </div>
         </div>
+
         <div className="profile-section">
           <h3>Data Management</h3>
 
           <div className="data-management">
             <div className="export-section">
               <h4>Export Data</h4>
-              <p>Download all your notes as a JSON file</p>
+              <p>Select and download specific subjects as a JSON file</p>
               <button
-                onClick={exportData}
+                onClick={() => setIsExportModalOpen(true)}
                 style={{
                   backgroundColor: theme.colors.primary,
                   color: theme.colors.text,
                 }}
               >
-                Export Notes
+                <i className="fas fa-download"></i> Export Notes
               </button>
-              {exportStatus && <p className="status-message">{exportStatus}</p>}
             </div>
 
             <div className="import-section">
               <h4>Import Data</h4>
-              <p>Upload a previously exported JSON file</p>
-              <label
-                className="import-button"
-                style={{
-                  backgroundColor: theme.colors.primary,
-                  color: theme.colors.text,
-                }}
-              >
-                Import Notes
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={importData}
-                  style={{ display: "none" }}
-                />
-              </label>
-              {importStatus && <p className="status-message">{importStatus}</p>}
+              <p>
+                Upload a previously exported JSON file (will be added to
+                existing notes)
+              </p>
+              {isImporting ? (
+                <Loader size="small" message="Importing..." />
+              ) : (
+                <label
+                  className="import-button"
+                  style={{
+                    backgroundColor: theme.colors.primary,
+                    color: theme.colors.text,
+                  }}
+                >
+                  <i className="fas fa-upload"></i> Import Notes
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={handleImportData}
+                    style={{ display: "none" }}
+                    disabled={isImporting}
+                  />
+                </label>
+              )}
             </div>
           </div>
+
+          {importStatus && (
+            <div
+              className={`status-message ${importStatus.includes("failed") || importStatus.includes("Import failed") ? "error" : "success"}`}
+            >
+              {importStatus}
+            </div>
+          )}
         </div>
       </div>
+
+      <ExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+      />
     </div>
   );
 }
 
-export default ProfilePage;
+export default React.memo(ProfilePage);

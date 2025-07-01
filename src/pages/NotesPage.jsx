@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useNotes } from "../context/NotesContext";
 import Heading from "../components/Heading";
@@ -6,11 +7,73 @@ import SubSubHeading from "../components/SubSubHeading";
 import Content from "../components/Content";
 import Code from "../components/Code";
 import AddImage from "../components/AddImage";
+import Loader from "../components/Loader";
 import "../style/NotesPage.css";
+
+const NoteComponent = React.memo(
+  ({ note, updateNote, updateColor, deleteNote, moveNote }) => {
+    // Remove key from props to prevent React warning
+    const props = {
+      id: note.id,
+      value: note.value,
+      color: note.color || "#000000",
+      onChange: updateNote,
+      onColorChange: updateColor,
+      onDelete: deleteNote,
+      onMoveUp: () => moveNote(note.id, -1),
+      onMoveDown: () => moveNote(note.id, 1),
+    };
+
+    switch (note.type) {
+      case "Heading":
+        return <Heading {...props} />;
+      case "SubHeading":
+        return <SubHeading {...props} />;
+      case "SubSubHeading":
+        return <SubSubHeading {...props} />;
+      case "Content":
+        return <Content {...props} />;
+      case "Code":
+        return <Code {...props} language={note.language} />;
+      case "Image":
+        return <AddImage {...props} />;
+      default:
+        return null;
+    }
+  },
+);
+
+NoteComponent.displayName = "NoteComponent";
 
 function NotesPage() {
   const { theme } = useTheme();
-  const { notes, updateNote, updateColor, deleteNote, moveNote } = useNotes();
+  const { notes, updateNote, updateColor, deleteNote, moveNote, isLoading } =
+    useNotes();
+
+  const renderedNotes = useMemo(
+    () =>
+      notes.map((note) => (
+        <NoteComponent
+          key={note.id}
+          note={note}
+          updateNote={updateNote}
+          updateColor={updateColor}
+          deleteNote={deleteNote}
+          moveNote={moveNote}
+        />
+      )),
+    [notes, updateNote, updateColor, deleteNote, moveNote],
+  );
+
+  if (isLoading) {
+    return (
+      <div className="notes-page">
+        <div className="notes-container">
+          <Loader message="Loading your notes..." />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="notes-page">
@@ -27,36 +90,7 @@ function NotesPage() {
               </p>
             </div>
           ) : (
-            notes.map((note) => {
-              const props = {
-                key: note.id,
-                id: note.id,
-                value: note.value,
-                color: note.color || "#000000",
-                onChange: updateNote,
-                onColorChange: updateColor,
-                onDelete: deleteNote,
-                onMoveUp: () => moveNote(note.id, -1),
-                onMoveDown: () => moveNote(note.id, 1),
-              };
-
-              switch (note.type) {
-                case "Heading":
-                  return <Heading {...props} />;
-                case "SubHeading":
-                  return <SubHeading {...props} />;
-                case "SubSubHeading":
-                  return <SubSubHeading {...props} />;
-                case "Content":
-                  return <Content {...props} />;
-                case "Code":
-                  return <Code {...props} language={note.language} />;
-                case "Image":
-                  return <AddImage {...props} />;
-                default:
-                  return null;
-              }
-            })
+            renderedNotes
           )}
         </div>
       </div>
@@ -64,4 +98,4 @@ function NotesPage() {
   );
 }
 
-export default NotesPage;
+export default React.memo(NotesPage);

@@ -151,7 +151,9 @@
 
 .export-section button,
 .import-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   padding: var(--spacing-md) var(--spacing-xl);
   border: none;
   border-radius: var(--border-radius-lg);
@@ -179,10 +181,20 @@
   font-weight: 500;
   text-align: center;
   animation: slideInUp var(--transition-fast) ease-out;
+}
+
+.status-message.success {
   background: rgba(34, 197, 94, 0.1);
   color: #22c55e;
   border: 1px solid rgba(34, 197, 94, 0.2);
 }
+
+.status-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
 .shortcuts-list {
   margin-top: var(--spacing-md);
   padding: var(--spacing-md);
@@ -205,6 +217,7 @@
   font-size: var(--font-size-small);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .profile-page {
