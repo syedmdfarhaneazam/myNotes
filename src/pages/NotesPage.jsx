@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useNotes } from "../context/NotesContext";
+import { useUserPreferences } from "../context/UserPreferencesContext";
 import Heading from "../components/Heading";
 import SubHeading from "../components/SubHeading";
 import SubSubHeading from "../components/SubSubHeading";
@@ -11,12 +12,34 @@ import Loader from "../components/Loader";
 import "../style/NotesPage.css";
 
 const NoteComponent = React.memo(
-  ({ note, updateNote, updateColor, deleteNote, moveNote }) => {
-    // Remove key from props to prevent React warning
+  ({
+    note,
+    updateNote,
+    updateColor,
+    deleteNote,
+    moveNote,
+    getDefaultColorForNoteType,
+  }) => {
+    // Apply default color if note doesn't have one set
+    useEffect(() => {
+      if (!note.color || note.color === "#000000") {
+        const defaultColor = getDefaultColorForNoteType(note.type);
+        if (defaultColor !== note.color) {
+          updateColor(note.id, defaultColor);
+        }
+      }
+    }, [
+      note.id,
+      note.color,
+      note.type,
+      updateColor,
+      getDefaultColorForNoteType,
+    ]);
+
     const props = {
       id: note.id,
       value: note.value,
-      color: note.color || "#000000",
+      color: note.color || getDefaultColorForNoteType(note.type),
       onChange: updateNote,
       onColorChange: updateColor,
       onDelete: deleteNote,
@@ -49,6 +72,7 @@ function NotesPage() {
   const { theme } = useTheme();
   const { notes, updateNote, updateColor, deleteNote, moveNote, isLoading } =
     useNotes();
+  const { getDefaultColorForNoteType } = useUserPreferences();
 
   const renderedNotes = useMemo(
     () =>
@@ -60,9 +84,17 @@ function NotesPage() {
           updateColor={updateColor}
           deleteNote={deleteNote}
           moveNote={moveNote}
+          getDefaultColorForNoteType={getDefaultColorForNoteType}
         />
       )),
-    [notes, updateNote, updateColor, deleteNote, moveNote],
+    [
+      notes,
+      updateNote,
+      updateColor,
+      deleteNote,
+      moveNote,
+      getDefaultColorForNoteType,
+    ],
   );
 
   if (isLoading) {

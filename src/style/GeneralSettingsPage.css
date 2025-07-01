@@ -1,0 +1,303 @@
+.general-settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.settings-section {
+  padding: var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-fast);
+  animation: fadeInUp var(--transition-normal) ease-out;
+}
+
+.settings-section:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-md);
+}
+
+.settings-section h3 {
+  font-family: var(--font-handwriting-bold);
+  font-size: var(--font-size-subheading);
+  font-weight: 600;
+  margin: 0 0 var(--spacing-sm) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.settings-section p {
+  font-size: var(--font-size-content);
+  line-height: 1.6;
+  margin: 0 0 var(--spacing-lg) 0;
+  opacity: 0.8;
+}
+
+.profile-setting {
+  margin-bottom: var(--spacing-lg);
+}
+
+.profile-setting label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-content);
+}
+
+.input-group {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input-group input {
+  flex: 1;
+  padding: var(--spacing-md);
+  border: 1px solid;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(2px);
+  min-width: 200px;
+}
+
+.input-group input:focus {
+  outline: none;
+  transform: scale(1.02);
+  box-shadow: var(--shadow-sm);
+}
+
+.input-group input::placeholder {
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.save-name-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-handwriting);
+  font-size: var(--font-size-content);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.save-name-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.save-status {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  animation: slideInUp var(--transition-fast) ease-out;
+}
+
+.save-status.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border: 1px solid;
+  border-radius: var(--border-radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all var(--transition-fast);
+}
+
+.shortcut-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(2px);
+}
+
+.shortcut-key kbd {
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-small);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid;
+}
+
+.shortcut-description {
+  font-size: var(--font-size-content);
+  opacity: 0.8;
+  text-align: right;
+  flex: 1;
+  margin-left: var(--spacing-md);
+}
+
+.system-preferences {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.preference-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+}
+
+.preference-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(2px);
+}
+
+.preference-info h4 {
+  font-family: var(--font-handwriting-bold);
+  font-size: var(--font-size-subsubheading);
+  font-weight: 500;
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.preference-info p {
+  font-size: var(--font-size-small);
+  margin: 0;
+  opacity: 0.7;
+}
+
+.preference-control {
+  flex-shrink: 0;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+}
+
+.status-badge.enabled {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.app-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+}
+
+.info-item {
+  font-size: var(--font-size-content);
+  padding: var(--spacing-xs) 0;
+}
+
+.info-item strong {
+  font-weight: 600;
+  margin-right: var(--spacing-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-group input {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .save-name-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .shortcuts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preference-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .preference-control {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .settings-section {
+    padding: var(--spacing-lg);
+  }
+
+  .shortcut-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .shortcut-description {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .preference-item {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-section {
+    padding: var(--spacing-md);
+  }
+
+  .input-group input,
+  .save-name-button {
+    font-size: var(--font-size-small);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .app-info {
+    padding: var(--spacing-md);
+  }
+}

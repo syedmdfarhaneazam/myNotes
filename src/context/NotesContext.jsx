@@ -7,6 +7,7 @@ import React, {
   useMemo,
 } from "react";
 import { getSubjects, saveSubjects } from "../indexedDb";
+import { useUserPreferences } from "./UserPreferencesContext";
 
 const NotesContext = createContext();
 
@@ -140,7 +141,7 @@ export const NotesProvider = ({ children }) => {
                     value: "",
                     language: type === "Code" ? "javascript" : undefined,
                     comment: "",
-                    color: "#000000",
+                    color: "#000000", // Will be updated by component with user preferences
                   },
                 ],
               }
