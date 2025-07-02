@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { useNotes } from "../context/NotesContext";
 import { useUserPreferences } from "../context/UserPreferencesContext";
@@ -73,30 +73,6 @@ function NotesPage() {
     useNotes();
   const { getDefaultColorForNoteType } = useUserPreferences();
 
-  const notesRef = useRef(null);
-
-  // PIP logic
-  useEffect(() => {
-    if (!("documentPictureInPicture" in window)) return;
-
-    const handleVisibilityChange = async () => {
-      try {
-        if (document.visibilityState === "hidden") {
-          await notesRef.current?.requestPictureInPicture();
-        } else if (document.pictureInPictureElement) {
-          await document.exitPictureInPicture();
-        }
-      } catch (err) {
-        console.warn("Picture-in-Picture error:", err);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
-
   const renderedNotes = useMemo(
     () =>
       notes.map((note) => (
@@ -131,7 +107,7 @@ function NotesPage() {
   }
 
   return (
-    <div className="notes-page" ref={notesRef}>
+    <div className="notes-page">
       <div className="notes-container">
         <div className="notes-inner">
           {notes.length === 0 ? (

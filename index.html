@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Note Book</title>
     <link rel="stylesheet" href="./src/style/global.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
       body {
         background-color: var(--theme-bg, #f9fafb);
@@ -14,11 +18,81 @@
           background-color 0.3s ease-in-out,
           color 0.3s ease-in-out;
       }
+      .pip-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #4b5563;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+      .pip-button:hover {
+        background-color: #6b7280;
+      }
     </style>
   </head>
   <body>
     <div class="tracker" id="tracker"></div>
     <div class="root" id="root"></div>
+    <button id="pipButton" class="pip-button">
+      <i class="fa fa-window-maximize" aria-hidden="true"></i>
+    </button>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      let pipWin = null;
+      const pipButton = document.getElementById("pipButton");
+      const container = document.getElementById("root");
+
+      async function openPiP() {
+        const pipInterface = window.documentPictureInPicture;
+        if (!pipInterface || typeof pipInterface.requestWindow !== "function") {
+          console.warn("Document PiP unavailable in this browser.");
+          return;
+        }
+
+        try {
+          const pipWindow = await pipInterface.requestWindow({
+            width: container.clientWidth,
+            height: container.clientHeight,
+          });
+
+          const styleLinks = document.querySelectorAll(
+            'link[rel="stylesheet"]',
+          );
+          styleLinks.forEach((link) => {
+            const newLink = pipWindow.document.createElement("link");
+            newLink.rel = "stylesheet";
+            newLink.href = link.href;
+            pipWindow.document.head.appendChild(newLink);
+          });
+
+          const styleTags = document.querySelectorAll("style");
+          styleTags.forEach((style) => {
+            const newStyle = pipWindow.document.createElement("style");
+            newStyle.textContent = style.textContent;
+            pipWindow.document.head.appendChild(newStyle);
+          });
+
+          pipWindow.document.body.appendChild(container);
+
+          pipWindow.addEventListener("pagehide", () => {
+            document.body.appendChild(container);
+            pipWin = null;
+            pipButton.textContent = "Open Floating View";
+          });
+
+          pipWin = pipWindow;
+          pipButton.textContent = "PiP Active";
+        } catch (e) {
+          console.warn("PiP error:", e);
+        }
+      }
+
+      pipButton.addEventListener("click", openPiP);
+    </script>
   </body>
 </html>

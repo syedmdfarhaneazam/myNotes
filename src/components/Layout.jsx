@@ -15,7 +15,6 @@ function Layout() {
     const handleKeyDown = (event) => {
       if (event.altKey) {
         event.preventDefault();
-
         switch (event.key.toLowerCase()) {
           case "p":
             navigate("/profile");
@@ -46,14 +45,9 @@ function Layout() {
         }
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [addNote, navigate]);
-
-  const scrollDown = () => {
-    window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
-  };
 
   return (
     <div
@@ -66,7 +60,12 @@ function Layout() {
       <Navbar />
       <main className="main-content">
         <Outlet />
-        <button className="scroll-down-btn" onClick={scrollDown}>
+        <button
+          className="scroll-down-btn"
+          onClick={() =>
+            window.scrollBy({ top: window.innerHeight, behavior: "smooth" })
+          }
+        >
           ⬇
         </button>
       </main>
