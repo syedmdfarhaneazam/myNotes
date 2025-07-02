@@ -20,8 +20,8 @@ import "./style/global.css";
 
 function App() {
   return (
-    <ErrorBoundary>
-      <ThemeProvider>
+    <ThemeProvider>
+      <ErrorBoundary>
         <ColorPaletteProvider>
           <UserPreferencesProvider>
             <NotesProvider>
@@ -45,8 +45,8 @@ function App() {
             </NotesProvider>
           </UserPreferencesProvider>
         </ColorPaletteProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 
