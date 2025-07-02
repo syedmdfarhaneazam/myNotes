@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ColorPicker from "./ColorPicker";
+import Delete from "./Delete";
 import "../style/OptionsButton.css";
 
 function OptionsButton({
@@ -14,6 +15,7 @@ function OptionsButton({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleToggle = () => {
     if (isOpen) {
@@ -27,14 +29,18 @@ function OptionsButton({
     }
   };
 
-  const handleDelete = () => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this item?",
-    );
-    if (confirmed) {
-      onDelete(id);
-    }
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
     setIsOpen(false);
+  };
+
+  const handleDeleteConfirm = () => {
+    onDelete(id);
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
   };
 
   const handleAction = (action) => {
@@ -68,7 +74,7 @@ function OptionsButton({
           </button>
 
           <button
-            onClick={handleDelete}
+            onClick={handleDeleteClick}
             title="Delete"
             style={{ color: "#ef4444" }}
           >
@@ -84,6 +90,13 @@ function OptionsButton({
       >
         <i className="fas fa-ellipsis-h"></i>
       </button>
+
+      <Delete
+        isOpen={showDeleteModal}
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        itemName="item"
+      />
     </div>
   );
 }

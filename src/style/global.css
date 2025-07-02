@@ -216,3 +216,16 @@ select:focus {
   outline: 2px solid var(--accent-color, #3b82f6);
   outline-offset: 2px;
 }
+.pip-button {
+  position: fixed;
+  bottom: 20px;
+  right: 95%;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  padding: 0 0;
+  cursor: pointer;
+  z-index: var(--z-navbar);
+  background-color: transparent;
+}

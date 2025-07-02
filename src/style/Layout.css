@@ -21,14 +21,13 @@
   bottom: 20px;
   right: 30px;
   font-size: 2rem;
-  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
   border-radius: var(--border-radius-lg);
   padding: 0 0;
   cursor: pointer;
   z-index: var(--z-navbar);
-  transition: background-color var(--transition-normal);
+  background-color: transparent;
 }
 
 .scroll-down-btn:hover {
