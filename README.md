@@ -1,206 +1,141 @@
-<style>
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fa;
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-}
-h1 {
-    color: #2c3e50;
-    font-size: 2.5em;
-    text-align: center;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-}
-h2 {
-    color: #2980b9;
-    font-size: 1.8em;
-    margin-top: 20px;
-}
-h3 {
-    color: #34495e;
-    font-size: 1.4em;
-}
-p {
-    font-size: 1.1em;
-    margin: 10px 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    background: #ecf0f1;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
-code {
-    background: #2c3e50;
-    color: #ecf0f1;
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: #2c3e50;
-    color: #ecf0f1;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-}
-a {
-    color: #3498db;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin: 10px 0;
-}
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.feature-box {
-    background: #e8f4f8;
-    padding: 15px;
-    border-left: 5px solid #3498db;
-    margin: 10px 0;
-    border-radius: 5px;
-}
-</style>
+<div style="font-family: Arial, sans-serif; background-color: #f4f7fa; color: #333; line-height: 1.6; margin: 0; padding: 20px; max-width: 800px; margin-left: auto; margin-right: auto; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-<div class="container">
+<h1 style="color: #2c3e50; font-size: 2.5em; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px;">📝 NoteMaster: Your Ultimate Digital Notes Companion</h1>
 
-# 📝 NoteMaster: Your Ultimate Digital Notes Companion
+<p style="font-size: 1.1em; margin: 10px 0;">Welcome to <strong style="color: #2980b9;">NoteMaster</strong>, a powerful and private note-taking app designed for students and learners to capture lecture notes, organize thoughts, and code on the go. With a sleek interface and robust features, NoteMaster helps you stay productive while keeping your notes secure in your browser's IndexedDB.</p>
 
-Welcome to **NoteMaster**, a powerful and private note-taking app designed for students and learners to capture lecture notes, organize thoughts, and code on the go. With a sleek interface and robust features, NoteMaster helps you stay productive while keeping your notes secure in your browser's IndexedDB.
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">✨ Features</h2>
 
-## ✨ Features
+<h3 style="color: #34495e; font-size: 1.4em;">📚 Multi-Subject Note Organization</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Organize your notes by adding as many subjects as you need. Create a hierarchy with:</p>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Headings</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Sub-headings</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Sub-sub-headings</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Content blocks</li>
+</ul>
+<p style="font-size: 1.1em; margin: 10px 0;">Each level supports <strong style="color: #2980b9;">32 configurable color shades</strong> for fonts, allowing you to personalize your notes for better readability and aesthetics.</p>
 
-### 📚 Multi-Subject Note Organization
-Organize your notes by adding as many subjects as you need. Create a hierarchy with:
-- **Headings**
-- **Sub-headings**
-- **Sub-sub-headings**
-- **Content blocks**
-
-Each level supports **32 configurable color shades** for fonts, allowing you to personalize your notes for better readability and aesthetics.
-
-<div class="feature-box">
-**Color Customization Example**  
-Choose from 32 vibrant shades to style your headings and content. Preview changes in real-time!  
+<div style="background: #e8f4f8; padding: 15px; border-left: 5px solid #3498db; margin: 10px 0; border-radius: 5px;">
+    <p style="font-size: 1.1em; margin: 10px 0;"><strong style="color: #34495e;">Color Customization Example</strong><br>Choose from 32 vibrant shades to style your headings and content. Preview changes in real-time!</p>
 </div>
 
-### 💻 Code Support
-Write and format code in multiple languages with **auto-coloring** and **auto-tabbing**:
-- Python
-- Java
-- JavaScript
-- Shell
-- C
-- C++
-
-Example Python code block:
-```python
+<h3 style="color: #34495e; font-size: 1.4em;">💻 Code Support</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Write and format code in multiple languages with <strong style="color: #2980b9;">auto-coloring</strong> , <strong style="color: #2980b9;">auto-tabbing</strong> and <strong style="color: #2980b9;">auto-formatting</strong>:</p>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Python</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Java</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">JavaScript</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Shell</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">C</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">C++</li>
+</ul>
+<p style="font-size: 1.1em; margin: 10px 0;">Example Python code block:</p>
+<pre style="background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto;">
 def greet(name):
     return f"Hello, {name}!"
 print(greet("NoteMaster User"))
-```
+</pre>
 
-### 🖼️ Image Integration
-Add images to your notes to complement your learning. Upload diagrams, screenshots, or handwritten notes to enrich your content.
+<h3 style="color: #34495e; font-size: 1.4em;">🖼️ Image Integration</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Add images to your notes to complement your learning. Upload diagrams, screenshots, or handwritten notes to enrich your content.</p>
+<img src="notes-page-placeholder.png" alt="Notes Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
-![Notes Page Placeholder](notes-page-placeholder.png)
+<h3 style="color: #34495e; font-size: 1.4em;">🔒 Privacy First</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Your categorization as a spammer by others unless you choose to share them.</p>
 
-### 🔒 Privacy First
-Your notes are stored securely in your browser's **IndexedDB**, ensuring they remain private and inaccessible to others unless you choose to share them.
+<h3 style="color: #34495e; font-size: 1.4em;">📤 Import & Export</h3>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Import</strong>: Append your friends' notes to your collection by importing their exported files.</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Export</strong>: Select a subject, export it as a file, and share it with others.</li>
+</ul>
 
-### 📤 Import & Export
-- **Import**: Append your friends' notes to your collection by importing their exported files.
-- **Export**: Select a subject, export it as a file, and share it with others.
+<h3 style="color: #34495e; font-size: 1.4em;">🎨 Themes</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Choose from a variety of themes to match your mood:</p>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Deep Sea</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Sunshine</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Aqua</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Sunset</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Twilight</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Light</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Forest</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Nature</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Cyberpunk</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Bubble Gum</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Golden Dark</li>
+    <li style="background: #ecf0f1; color:grey; margin: 5px 0; padding: 10px; border-radius: 5px;">DARK</li>
+</ul>
+<img src="color-picker-placeholder.png" alt="Color Picker Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
-### 🎨 Themes
-Choose from a variety of themes to match your mood:
-- Deep Sea
-- Sunshine
-- Twilight
-- Light
-- Forest
-- Bubble Gum
-- Golden Dark
+<h3 style="color: #34495e; font-size: 1.4em;">⚙️ Note Color Configuration</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Set default colors for different note types (headings, sub-headings, content, etc.). Preview your changes in real-time for a seamless experience.</p>
 
-![Color Picker Placeholder](color-picker-placeholder.png)
+<h3 style="color: #34495e; font-size: 1.4em;">⌨️ Keyboard Shortcuts</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Boost your productivity with intuitive shortcuts:</p>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+P</code>: Go to Notes page</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+S</code>: Go to Profile page</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+H</code>: Show/Hide help modal</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Heading</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Sub-heading</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Sub-sub-heading</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Content block</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Code block</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Close modals/overlays</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Scroll to bottom of page</li>
+</ul>
 
-### ⚙️ Note Color Configuration
-Set default colors for different note types (headings, sub-headings, content, etc.). Preview your changes in real-time for a seamless experience.
+<h3 style="color: #34495e; font-size: 1.4em;">📽️ Picture-in-Picture Mode</h3>
+<p style="font-size: 1.1em; margin: 10px 0;">Keep NoteMaster on top while watching video lectures in full-screen mode. Take notes without switching tabs!</p>
+<img src="pip-placeholder.png" alt="Picture-in-Picture Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
-### ⌨️ Keyboard Shortcuts
-Boost your productivity with intuitive shortcuts:
-- `Alt+P`: Go to Notes page
-- `Alt+S`: Go to Profile page
-- `Alt+H`: Show/Hide help modal
-- Add new Heading, Sub-heading, Sub-sub-heading, Content block, or Code block
-- Close modals/overlays
-- Scroll to bottom of page
+<h3 style="color: #34495e; font-size: 1.4em;">⚡ Performance Settings</h3>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Auto-save</strong>: Changes are saved automatically as you type.</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Data Persistence</strong>: Notes are stored locally in your browser.</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Optimized Rendering</strong>: Ensures smooth performance even with large note collections.</li>
+</ul>
 
-### 📽️ Picture-in-Picture Mode
-Keep NoteMaster on top while watching video lectures in full-screen mode. Take notes without switching tabs!
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">📱 Mobile-Friendly</h2>
+<p style="font-size: 1.1em; margin: 10px 0;">NoteMaster is fully responsive, making it easy to take notes on the go.</p>
+<img src="mobile-mode-placeholder.png" alt="Mobile Mode Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
-![Picture-in-Picture Placeholder](pip-placeholder.png)
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">🚀 Getting Started</h2>
+<ol style="font-size: 1.1em; margin: 10px 0; padding-left: 20px;">
+    <li style="margin: 5px 0;"><strong style="color: #34495e;">Clone the Repository</strong>:
+        <pre style="background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto;">
+git clone https://github.com/your-username/notemaster.git
+        </pre>
+    </li>
+    <li style="margin: 5px 0;"><strong style="color: #34495e;">Install Dependencies</strong>:
+        <pre style="background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto;">
+npm install
+        </pre>
+    </li>
+    <li style="margin: 5px 0;"><strong style="color: #34495e;">Run the App</strong>:
+        <pre style="background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto;">
+npm start
+        </pre>
+    </li>
+    <li style="margin: 5px 0;">Open your browser and navigate to <a href="http://localhost:3000" style="color: #3498db; text-decoration: none;">http://localhost:3000</a>.</li>
+</ol>
 
-### ⚡ Performance Settings
-- **Auto-save**: Changes are saved automatically as you type.
-- **Data Persistence**: Notes are stored locally in your browser.
-- **Optimized Rendering**: Ensures smooth performance even with large note collections.
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">🛠️ Tech Stack</h2>
+<ul style="list-style-type: none; padding: 0;">
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Frontend</strong>: React, Tailwind CSS</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Storage</strong>: IndexedDB</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Code Highlighting</strong>: Prism.js</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><strong style="color: #2980b9;">Build Tool</strong>: Vite</li>
+</ul>
 
-## 📱 Mobile-Friendly
-NoteMaster is fully responsive, making it easy to take notes on the go.
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">🤝 Contributing</h2>
+<p style="font-size: 1.1em; margin: 10px 0;">I welcome contributions!</p>
 
-![Mobile Mode Placeholder](mobile-mode-placeholder.png)
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">📜 License</h2>
+<p style="font-size: 1.1em; margin: 10px 0;">This project is licensed under the MIT License. See the <a href="LICENSE" style="color: #3498db; text-decoration: none;">LICENSE</a> file for details.</p>
 
-## 🚀 Getting Started
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/syedmdfarhaneazam/myNotes.git
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   cd myNotes
-   npm install
-   ```
-
-3. **Run the App**:
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:5173`.
-
-## 🛠️ Tech Stack
-- **Frontend**: React, Tailwind CSS
-- **Storage**: IndexedDB
-- **Code Highlighting**: Prism.js
-- **Build Tool**: Vite
-
-## 🤝 Contributing
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
-
-## 📜 License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## 📸 Screenshots
-![Profile Page Placeholder](profile-page-placeholder.png)
+<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">📸 Screenshots</h2>
+<img src="profile-page-placeholder.png" alt="Profile Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
 </div>
