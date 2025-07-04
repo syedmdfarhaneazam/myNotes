@@ -2,7 +2,7 @@
 
 <h1 style="color: #2c3e50; font-size: 2.5em; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px;">📝 NoteMaster: Your Ultimate Digital Notes Companion</h1>
 
-<p style="font-size: 1.1em; margin: 10px 0;">Welcome to <strong style="color: #2980b9;">NoteMaster</strong>, a powerful and private note-taking app designed for students and learners to capture lecture notes, organize thoughts, and code on the go. With a sleek interface and robust features, NoteMaster helps you stay productive while keeping your notes secure in your browser's IndexedDB.</p>
+<p style="font-size: 1.1em; margin: 10px 0;">Welcome to <a href="https://my-notes-three-flax.vercel.app/"><strong style="color: #2980b9;">NoteMaster</strong></a>, a powerful and private note-taking app designed for students and learners to capture lecture notes, organize thoughts, and code on the go. With a sleek interface and robust features, NoteMaster helps you stay productive while keeping your notes secure in your browser's IndexedDB. <a href="https://my-notes-three-flax.vercel.app/"><strong style="color: #2980b9;">Visit NoteMaster by cliking here 🤖</strong></a></p>
 
 <h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">✨ Features</h2>
 
@@ -39,8 +39,7 @@ print(greet("NoteMaster User"))
 
 <h3 style="color: #34495e; font-size: 1.4em;">🖼️ Image Integration</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Add images to your notes to complement your learning. Upload diagrams, screenshots, or handwritten notes to enrich your content.</p>
-https://github.com/user-attachments/assets/0a56180c-a327-4cb4-8d08-3dff6be044d5
-
+<img src="https://github.com/user-attachments/assets/8c48f51d-4a5c-47fd-a806-957d2f5ac644" alt="Notes Page Placeholder" style="min-width: 100vw;">
 
 <h3 style="color: #34495e; font-size: 1.4em;">🔒 Privacy First</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Your categorization as a spammer by others unless you choose to share them.</p>
@@ -67,7 +66,7 @@ https://github.com/user-attachments/assets/0a56180c-a327-4cb4-8d08-3dff6be044d5
     <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Golden Dark</li>
     <li style="background: #ecf0f1; color:grey; margin: 5px 0; padding: 10px; border-radius: 5px;">DARK</li>
 </ul>
-<img src="color-picker-placeholder.png" alt="Color Picker Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+<img src="https://github.com/user-attachments/assets/52133e08-db8c-4f2e-8aba-3ae529d4e61e" alt="Themes" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
 <h3 style="color: #34495e; font-size: 1.4em;">⚙️ Note Color Configuration</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Set default colors for different note types (headings, sub-headings, content, etc.). Preview your changes in real-time for a seamless experience.</p>
@@ -89,7 +88,8 @@ https://github.com/user-attachments/assets/0a56180c-a327-4cb4-8d08-3dff6be044d5
 
 <h3 style="color: #34495e; font-size: 1.4em;">📽️ Picture-in-Picture Mode</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Keep NoteMaster on top while watching video lectures in full-screen mode. Take notes without switching tabs!</p>
-<img src="pip-placeholder.png" alt="Picture-in-Picture Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+<img src="https://github.com/user-attachments/assets/a3c5f4a7-0c6a-43b0-beb1-1338eb599010" alt="Picture-in-Picture Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+
 
 <h3 style="color: #34495e; font-size: 1.4em;">⚡ Performance Settings</h3>
 <ul style="list-style-type: none; padding: 0;">
@@ -100,7 +100,8 @@ https://github.com/user-attachments/assets/0a56180c-a327-4cb4-8d08-3dff6be044d5
 
 <h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">📱 Mobile-Friendly</h2>
 <p style="font-size: 1.1em; margin: 10px 0;">NoteMaster is fully responsive, making it easy to take notes on the go.</p>
-<img src="mobile-mode-placeholder.png" alt="Mobile Mode Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+<img src="https://github.com/user-attachments/assets/2cfab944-a225-480b-a2a5-d5f9835d2dc1" alt="Mobile Mode Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+
 
 <h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">🚀 Getting Started</h2>
 <ol style="font-size: 1.1em; margin: 10px 0; padding-left: 20px;">
@@ -135,8 +136,3 @@ npm start
 
 <h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">📜 License</h2>
 <p style="font-size: 1.1em; margin: 10px 0;">This project is licensed under the MIT License. See the <a href="LICENSE" style="color: #3498db; text-decoration: none;">LICENSE</a> file for details.</p>
-
-<h2 style="color: #2980b9; font-size: 1.8em; margin-top: 20px;">📸 Screenshots</h2>
-<img src="profile-page-placeholder.png" alt="Profile Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
-
-</div>
