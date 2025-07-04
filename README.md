@@ -39,7 +39,7 @@ print(greet("NoteMaster User"))
 
 <h3 style="color: #34495e; font-size: 1.4em;">🖼️ Image Integration</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Add images to your notes to complement your learning. Upload diagrams, screenshots, or handwritten notes to enrich your content.</p>
-<img src="notes-page-placeholder.png" alt="Notes Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+<video src="/myNotesCodeVideo.mp4" alt="Notes Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
 
 <h3 style="color: #34495e; font-size: 1.4em;">🔒 Privacy First</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Your categorization as a spammer by others unless you choose to share them.</p>
@@ -77,13 +77,13 @@ print(greet("NoteMaster User"))
     <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+P</code>: Go to Notes page</li>
     <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+S</code>: Go to Profile page</li>
     <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+H</code>: Show/Hide help modal</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Heading</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Sub-heading</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Sub-sub-heading</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Content block</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Add new Code block</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Close modals/overlays</li>
-    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;">Scroll to bottom of page</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+1</code>: Add new Heading</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+2</code>: Add new Sub-heading</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+3</code>: Add new Sub-sub-heading</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+4</code>: Add new Content block</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+5</code>: Add new Code block</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">esc</code>:Close modals/overlays</li>
+    <li style="background: #ecf0f1; margin: 5px 0; padding: 10px; border-radius: 5px;"><code style="background: #2c3e50; color: #ecf0f1; padding: 2px 5px; border-radius: 3px;">Alt+G</code>:Scroll to bottom of page</li>
 </ul>
 
 <h3 style="color: #34495e; font-size: 1.4em;">📽️ Picture-in-Picture Mode</h3>
