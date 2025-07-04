@@ -39,7 +39,7 @@ print(greet("NoteMaster User"))
 
 <h3 style="color: #34495e; font-size: 1.4em;">🖼️ Image Integration</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Add images to your notes to complement your learning. Upload diagrams, screenshots, or handwritten notes to enrich your content.</p>
-<video src="/myNotesCodeVideo.mp4" alt="Notes Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">
+<video src="[/myNotesCodeVideo.mp4](https://github.com/syedmdfarhaneazam/myNotes/blob/main/myNotesCodeVideo.mp4)" alt="Notes Page Placeholder" style="max-width: 100%; border-radius: 8px; margin: 10px 0;"></video>
 
 <h3 style="color: #34495e; font-size: 1.4em;">🔒 Privacy First</h3>
 <p style="font-size: 1.1em; margin: 10px 0;">Your categorization as a spammer by others unless you choose to share them.</p>
